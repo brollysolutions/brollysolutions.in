@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/vamsh/brollysolutions/brollysolutions",
-      "program": "c:/Users/vamsh/brollysolutions/brollysolutions/build/Debug/outDebug",
+      "cwd": "c:/Users/vamsh/brollysolutions/brollysolutions_backend",
+      "program": "c:/Users/vamsh/brollysolutions/brollysolutions_backend/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
