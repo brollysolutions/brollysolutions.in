@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors based on your theme and image inspiration */
+  --color-brand-black: #1a1a1a; 
+  --color-brand-dark: #242424;
+  --color-brand-gold: #F2DA60; /* The yellow/gold from your Brolly logo */
+  --color-brand-gold-hover: #F6E68E;
+  --color-brand-green: #25D366; /* WhatsApp Green */
+  --color-brand-green-hover: #1EBE5D;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-brand-black);
+    color: white;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+}
