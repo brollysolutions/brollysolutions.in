@@ -64,10 +64,7 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-
-          {/* RIGHT SIDE: The Lead Form Component */}
           <div className="relative">
-            {/* Subtle glow effect behind the form */}
             <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-transparent blur-xl -z-10 rounded-3xl"></div>
             <LeadForm />
           </div>
@@ -76,14 +73,14 @@ export default function ContactPage() {
       </section>
 
       {/* 3. OPTIONAL: LOGO/TRUST STRIP */}
-      <section className="py-12 border-t border-gray-800 bg-brand-dark/30">
+      {/* <section className="py-12 border-t border-gray-800 bg-brand-dark/30">
         <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center items-center gap-12 opacity-30 grayscale">
           <span className="text-xl font-black italic tracking-tighter">PARTNER ONE</span>
           <span className="text-xl font-black italic tracking-tighter">PARTNER TWO</span>
           <span className="text-xl font-black italic tracking-tighter">PARTNER THREE</span>
           <span className="text-xl font-black italic tracking-tighter">PARTNER FOUR</span>
         </div>
-      </section>
+      </section> */}
 
     </div>
   );
