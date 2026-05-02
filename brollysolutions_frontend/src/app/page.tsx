@@ -9,7 +9,7 @@ export default function Home() {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.8, ease: "easeOut" }
   };
-
+  
   return (
     <div className="flex flex-col items-center min-h-screen bg-brand-black text-white">
       
@@ -154,7 +154,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
