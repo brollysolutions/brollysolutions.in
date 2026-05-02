@@ -2,118 +2,56 @@ import React from 'react';
 import Link from 'next/link';
 
 const services = [
-  {
-    title: "High-Performance Web Ecosystems",
-    tagline: "Presence that commands attention.",
-    description: "We don't just build websites; we engineer digital storefronts designed for high conversion and zero friction. Our focus is on speed, accessibility, and a seamless journey from visitor to loyal customer.",
-    deliverables: ["Conversion-Optimized Layouts", "High-Traffic Resilience", "Global Content Delivery", "Secure Payment Architecture"],
-    icon: "🌐"
-  },
-  {
-    title: "Intelligent Systems & AI Logic",
-    tagline: "Decisions driven by data, not guesses.",
-    description: "Integrate predictive intelligence into your existing operations. We build custom logic engines that analyze patterns, automate complex decision-making, and provide your team with actionable insights in real-time.",
-    deliverables: ["Custom Intelligence Models", "Predictive Trend Analysis", "Natural Language Processing", "Automated Insight Reporting"],
-    icon: "🤖"
-  },
-  {
-    title: "Seamless Operational Automation",
-    tagline: "Efficiency is the ultimate competitive edge.",
-    description: "Eliminate manual bottlenecks that slow your growth. We architect invisible workflows that handle repetitive tasks with perfect precision, allowing your human talent to focus on high-value creative strategy.",
-    deliverables: ["Workflow Synchronization", "Legacy System Integration", "Data Migration Pipelines", "Automated Quality Control"],
-    icon: "⚡"
-  },
-  {
-    title: "Strategic Experience Design",
-    tagline: "Interfaces that feel like second nature.",
-    description: "User experience is the silent ambassador of your brand. We design intuitive, sophisticated interfaces that reduce cognitive load and foster an immediate sense of trust and authority with your users.",
-    deliverables: ["User Journey Mapping", "Behavioral Analysis", "Interactive Prototyping", "Multi-Platform Visual Cohesion"],
-    icon: "🎨"
-  }
+  { num: "01", title: "Custom Software Development", desc: "Web apps, internal tools, customer portals, and SaaS products. Built clean, documented, and yours to own completely.", tags: ["React", "Next.js", "Python", "PostgreSQL"] },
+  { num: "02", title: "AI Integration & Automation", desc: "Add AI to your existing workflows — document processing, chatbots, predictions, and intelligent reporting.", tags: ["LLMs", "OpenAI API", "Automation"] },
+  { num: "03", title: "Data & Business Intelligence", desc: "Unify your data sources, clean your pipelines, and get dashboards that actually help you make decisions.", tags: ["Tableau", "Power BI", "dbt"] },
+  { num: "04", title: "Cloud Infrastructure", desc: "Move to cloud, cut costs, or fix a fragile infrastructure. We architect for reliability and scale — not just speed.", tags: ["AWS", "Azure", "Docker", "Kubernetes"] },
+  { num: "05", title: "MVP & Product Development", desc: "From napkin idea to working product in 8–12 weeks. We'll challenge your assumptions and help you build the right thing first.", tags: ["Discovery", "Prototyping", "Launch"] },
+  { num: "06", title: "Tech Advisory & Audit", desc: "Not sure if your tech is healthy? We'll review your architecture, codebase, and infrastructure — and tell you the truth.", tags: ["Architecture Review", "Security", "Cost Audit"] }
 ];
 
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-brand-black text-white pb-24">
       
-      {/* 1. PAGE HEADER */}
-      <section className="relative py-24 px-6 border-b border-gray-800">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-brand-gold font-mono tracking-widest uppercase text-sm">
-            Core Competencies
-          </h1>
-          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight">
-            Our <span className="text-brand-gold">Solutions</span> Portfolio
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            From initial concept to industrial-scale deployment, we provide the strategic engineering required to dominate your market.
-          </p>
-        </div>
-      </section>
-
-      {/* 2. DETAILED SERVICES STACK */}
-      <section className="py-24 px-6 max-w-7xl mx-auto space-y-32">
-        {services.map((service, index) => (
-          <div 
-            key={index} 
-            className={`flex flex-col lg:flex-row gap-16 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
-          >
-            {/* Image/Visual Placeholder */}
-            <div className="w-full lg:w-1/2 aspect-video bg-brand-dark border border-gray-800 rounded-3xl relative overflow-hidden group">
-              <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-20 group-hover:scale-110 transition-transform duration-500">
-                {service.icon}
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent"></div>
-              <div className="absolute bottom-8 left-8">
-                <p className="text-brand-gold font-mono text-sm tracking-widest">{service.tagline}</p>
-              </div>
+      <section className="py-24 px-6 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end mb-20">
+            <div>
+              <p className="text-brand-gold font-mono text-xs uppercase tracking-widest mb-4">What We Build</p>
+              <h1 className="text-5xl font-bold tracking-tight">Services We Offer</h1>
             </div>
-
-            {/* Content Side */}
-            <div className="w-full lg:w-1/2 text-left space-y-6">
-              <h3 className="text-3xl md:text-4xl font-bold text-white">
-                {service.title}
-              </h3>
-              <p className="text-gray-400 text-lg leading-relaxed">
-                {service.description}
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                {service.deliverables.map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-gray-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-gold"></div>
-                    <span className="text-sm font-medium">{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-6">
-                <Link 
-                  href="/contact" 
-                  className="inline-flex items-center gap-2 text-brand-gold font-bold hover:gap-4 transition-all"
-                >
-                  Inquire about this solution 
-                  <span>→</span>
-                </Link>
-              </div>
-            </div>
+            <p className="text-gray-400 text-lg leading-relaxed md:text-right">
+              We pick a focused set of things and do them exceptionally — rather than claiming to do everything and spreading thin.
+            </p>
           </div>
-        ))}
-      </section>
 
-      {/* 3. FINAL CTA */}
-      <section className="px-6">
-        <div className="max-w-5xl mx-auto bg-brand-dark border border-gray-800 p-12 rounded-3xl text-center">
-          <h3 className="text-3xl font-bold mb-6">Not sure which solution fits your needs?</h3>
-          <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-            Our strategists are ready to conduct a technical audit of your current operations and identify the highest-impact path forward.
-          </p>
-          <Link 
-            href="/contact" 
-            className="px-10 py-4 bg-brand-gold text-brand-black font-bold rounded-xl hover:bg-brand-gold-hover transition-colors"
-          >
-            Schedule a Discovery Call
-          </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 bg-gray-800 border border-gray-800 rounded-2xl overflow-hidden">
+            {services.map((service, i) => (
+              <div key={i} className="bg-brand-dark p-10 hover:bg-brand-black transition-colors relative group">
+                <div className="font-serif text-brand-gold/40 text-xl italic mb-6 group-hover:text-brand-gold transition-colors">
+                  {service.num}
+                </div>
+                <h3 className="text-xl font-bold mb-4">{service.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-8 h-20">
+                  {service.desc}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {service.tags.map((tag, j) => (
+                    <span key={j} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 border border-brand-gold/20 text-brand-gold rounded bg-brand-gold/5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-20 text-center">
+            <Link href="/contact" className="inline-block px-8 py-4 bg-brand-gold text-brand-black font-bold rounded-xl hover:bg-brand-gold-hover transition-all">
+              Book a Free Tech Audit →
+            </Link>
+          </div>
         </div>
       </section>
 
