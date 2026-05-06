@@ -1,87 +1,166 @@
+"use client";
+
+import React from 'react';
+import { motion } from 'framer-motion';
 import LeadForm from "@/features/contact/components/LeadForm";
+
+function SectionLabel({ children }: { children: string }) {
+  return (
+    <div className="inline-flex items-center gap-3 mb-6">
+      <span className="w-7 h-px bg-brand-gold/40" />
+      <span className="text-[10px] font-mono uppercase tracking-[0.35em] text-brand-gold">
+        {children}
+      </span>
+    </div>
+  );
+}
+
+const steps = [
+  {
+    num: "01",
+    title: "Strategic Review",
+    desc: "We evaluate your current stack, team composition, and business objectives before proposing anything.",
+  },
+  {
+    num: "02",
+    title: "Discovery Call",
+    desc: "A 30-minute technical deep-dive with our senior engineers to align on scope and constraints.",
+  },
+  {
+    num: "03",
+    title: "Custom Architecture",
+    desc: "You receive a tailored roadmap, timeline, and exact fixed pricing — nothing vague, nothing hidden.",
+  },
+];
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-brand-black text-white pb-24">
-      
-      {/* 1. HEADER SECTION */}
-      <section className="relative py-24 px-6 border-b border-gray-800">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-brand-gold font-mono tracking-widest uppercase text-sm">
-            Begin the Journey
-          </h1>
-          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight">
-            Let’s Build Something <span className="text-brand-gold italic font-serif">Exceptional.</span>
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Whether you’re looking to automate operations or launch a market-disrupting platform, our team is ready to provide the strategic engineering you need.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-brand-black text-white pt-40 pb-32 relative overflow-hidden">
 
-      {/* 2. CONTACT CONTENT & FORM */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          
-          {/* LEFT SIDE: Information & Trust */}
-          <div className="space-y-12 text-left">
-            <div className="space-y-6">
-              <h3 className="text-3xl font-bold">What happens next?</h3>
-              <ul className="space-y-8">
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/10 border border-brand-gold flex items-center justify-center text-brand-gold font-bold text-sm">1</div>
-                  <div>
-                    <h4 className="text-white font-bold">Strategic Audit</h4>
-                    <p className="text-gray-400 text-sm mt-1">Our team reviews your inquiry and performs a preliminary audit of your digital needs.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/10 border border-brand-gold flex items-center justify-center text-brand-gold font-bold text-sm">2</div>
-                  <div>
-                    <h4 className="text-white font-bold">Discovery Call</h4>
-                    <p className="text-gray-400 text-sm mt-1">We schedule a 30-minute deep-dive session to discuss your objectives and technical requirements.</p>
-                  </div>
-                </li>
-                <li className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/10 border border-brand-gold flex items-center justify-center text-brand-gold font-bold text-sm">3</div>
-                  <div>
-                    <h4 className="text-white font-bold">Custom Proposal</h4>
-                    <p className="text-gray-400 text-sm mt-1">You receive a tailored roadmap outlining our recommended solution, timeline, and investment.</p>
-                  </div>
-                </li>
+      {/* Ambient glow */}
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none -z-0"
+        style={{ background: "radial-gradient(circle, rgba(242,218,96,0.05) 0%, transparent 65%)" }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+        {/* ─── HEADER ─────────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-end">
+          <div className="lg:col-span-8">
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <SectionLabel>Get in Touch</SectionLabel>
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="text-6xl md:text-8xl font-bold tracking-tighter leading-none mt-2"
+            >
+              Initiate <br />
+              <span className="font-serif italic text-brand-gold">Dialogue.</span>
+            </motion.h1>
+          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="lg:col-span-4 pb-2"
+          >
+            <p className="text-gray-500 text-lg font-light leading-relaxed">
+              Submit your project details below. We review every inquiry personally to determine if we're the right fit for your scaling needs.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* ─── MAIN LAYOUT ─────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+
+          {/* LEFT: Process + Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-5 space-y-14"
+          >
+            {/* Process */}
+            <div>
+              <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-gray-600 mb-7 pb-4 border-b border-[#1a1a1a]">
+                The Audit Process
+              </p>
+              <ul className="space-y-0">
+                {steps.map((step, i) => (
+                  <li
+                    key={i}
+                    className="group border-b border-[#1a1a1a] py-7 relative overflow-hidden"
+                  >
+                    {/* Hover sweep */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/0 via-brand-gold/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms] ease-in-out pointer-events-none" />
+                    <div className="relative z-10 flex gap-6 items-start">
+                      <span className="font-mono text-xs text-gray-700 group-hover:text-brand-gold transition-colors duration-300 pt-1 flex-shrink-0">
+                        {step.num}
+                      </span>
+                      <div>
+                        <h4 className="text-lg font-semibold tracking-tight text-gray-400 group-hover:text-white transition-colors duration-300 mb-2">
+                          {step.title}
+                        </h4>
+                        <p className="text-gray-600 text-sm font-light leading-relaxed group-hover:text-gray-500 transition-colors">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* QUICK CONTACT CARDS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-gray-800">
+            {/* Contact Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6 border-t border-[#1a1a1a]">
               <div>
-                <p className="text-brand-gold font-mono text-xs uppercase tracking-widest mb-2">General Inquiries</p>
-                <p className="text-white font-medium">hello@brollysolutions.com</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-700 mb-2.5">
+                  Direct Inquiry
+                </p>
+                <a
+                  href="mailto:hello@brollysolutions.com"
+                  className="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-300 font-light"
+                >
+                  hello@brollysolutions.com
+                </a>
               </div>
               <div>
-                <p className="text-brand-gold font-mono text-xs uppercase tracking-widest mb-2">Office Hours</p>
-                <p className="text-white font-medium">Mon — Fri, 9am — 6pm</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-700 mb-2.5">
+                  Operating Hours
+                </p>
+                <p className="text-gray-400 text-sm font-light">Mon — Sat, 9am — 6pm IST</p>
               </div>
             </div>
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-brand-gold/20 to-transparent blur-xl -z-10 rounded-3xl"></div>
-            <LeadForm />
-          </div>
+          </motion.div>
+
+          {/* RIGHT: Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:col-span-7"
+          >
+            {/* Single unified glass card */}
+            <div className="bg-brand-surface border border-[#1e1e1e] p-8 md:p-12 rounded-2xl relative overflow-hidden group">
+              <div
+                className="absolute top-0 right-0 w-64 h-64 pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-700"
+                style={{ background: "radial-gradient(circle, rgba(242,218,96,0.06) 0%, transparent 70%)" }}
+              />
+              <div className="relative z-10">
+                <LeadForm />
+              </div>
+            </div>
+          </motion.div>
 
         </div>
-      </section>
-
-      {/* 3. OPTIONAL: LOGO/TRUST STRIP */}
-      {/* <section className="py-12 border-t border-gray-800 bg-brand-dark/30">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center items-center gap-12 opacity-30 grayscale">
-          <span className="text-xl font-black italic tracking-tighter">PARTNER ONE</span>
-          <span className="text-xl font-black italic tracking-tighter">PARTNER TWO</span>
-          <span className="text-xl font-black italic tracking-tighter">PARTNER THREE</span>
-          <span className="text-xl font-black italic tracking-tighter">PARTNER FOUR</span>
-        </div>
-      </section> */}
-
+      </div>
     </div>
   );
 }

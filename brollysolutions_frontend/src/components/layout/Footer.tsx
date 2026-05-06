@@ -1,42 +1,100 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
 
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Our Team', href: '/about' },
+  { label: 'Free Audit', href: '/contact' },
+];
+
+const socialItems = [
+  { label: 'LinkedIn', href: '#' },
+  { label: 'GitHub', href: '#' },
+  { label: 'Twitter', href: '#' },
+];
+
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-brand-black text-white pt-20 pb-10 border-t border-gray-800 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-          
-          {/* Brand Col */}
-          <div className="md:col-span-5 space-y-6">
-            <Link href="/" className="flex items-center gap-3">
-              <Image src="/logo.png" alt="Brolly Solutions Logo" width={140} height={40} className="object-contain h-8 w-auto" style={{width:"auto"}}/>
+    <footer className="bg-[#050505] text-white border-t border-[#161616] pt-20 pb-8">
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* Top Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+
+          {/* Brand */}
+          <div className="md:col-span-5">
+            <Link href="/" className="inline-block mb-6 opacity-80 hover:opacity-100 transition-opacity">
+              <Image
+                src="/logo.png"
+                alt="Brolly Solutions"
+                width={148}
+                height={44}
+                className="h-8 w-auto object-contain"
+              />
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              A small, senior technology team helping growing businesses build smarter software. Honest pricing, senior talent, and no big-agency bloat.
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xs font-light">
+              Boutique software engineering and tech advisory. We build reliable, scalable systems for businesses that demand excellence.
             </p>
           </div>
 
-          {/* Links Col 1 */}
-          <div className="md:col-span-3">
-            <h5 className="text-brand-gold font-mono text-xs uppercase tracking-widest mb-6">Navigation</h5>
-            <ul className="space-y-4">
-              <li><Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/services" className="text-sm text-gray-400 hover:text-white transition-colors">Services</Link></li>
-              <li><Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors">Our Team</Link></li>
-              <li><Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">Free Audit</Link></li>
+          {/* Nav */}
+          <div className="md:col-span-2 md:col-start-7">
+            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 mb-6">Navigation</p>
+            <ul className="space-y-3.5">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-gray-500 hover:text-brand-gold transition-colors duration-300 font-light"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Links Col 2 */}
-          <div className="md:col-span-4">
-            <h5 className="text-brand-gold font-mono text-xs uppercase tracking-widest mb-6">Contact</h5>
-            <ul className="space-y-4">
-              <li className="text-sm text-gray-400">hello@brollysolutions.com</li>
-              <li className="text-sm text-gray-400">Mon — Fri, 9am — 6pm</li>
-              <li className="pt-4">
-                <Link href="/contact" className="inline-block px-6 py-2 bg-brand-dark border border-gray-700 rounded-lg text-sm font-bold hover:border-brand-gold transition-colors">
-                  Book a Call
+          {/* Social */}
+          <div className="md:col-span-2">
+            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 mb-6">Social</p>
+            <ul className="space-y-3.5">
+              {socialItems.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-sm text-gray-500 hover:text-brand-gold transition-colors duration-300 font-light"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="md:col-span-3">
+            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 mb-6">Contact</p>
+            <ul className="space-y-3.5 text-sm font-light text-gray-500">
+              <li>
+                <a
+                  href="mailto:hello@brollysolutions.com"
+                  className="hover:text-brand-gold transition-colors duration-300"
+                >
+                  hello@brollysolutions.com
+                </a>
+              </li>
+              <li>Mon — Sat, 9am — 6pm IST</li>
+              <li className="pt-2">
+                <Link
+                  href="/contact"
+                  className="text-white text-sm font-medium border-b border-gray-700 pb-1 hover:text-brand-gold hover:border-brand-gold transition-all duration-300"
+                >
+                  Start a Project
                 </Link>
               </li>
             </ul>
@@ -44,14 +102,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} Brolly Solutions. All rights reserved.
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-[#161616]">
+          <p className="text-xs text-gray-700 font-light">
+            © {currentYear} Brolly Solutions. All rights reserved.
           </p>
-          <p className="text-xs text-gray-600 font-mono">
-            New company · Honest pricing · Senior team
-          </p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="text-xs text-gray-700 hover:text-gray-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-xs text-gray-700 hover:text-gray-400 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
         </div>
+
       </div>
     </footer>
   );

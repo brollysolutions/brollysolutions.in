@@ -1,116 +1,185 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 
 export default function LeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.[0]) setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      // Simulate a network request to the backend (1.5 seconds)
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      console.log("Form Submitted to Backend:", formData);
-      
-      // Trigger the success toast notification
-      toast.success("Message sent! We will be in touch shortly.");
-      
-      // Reset form
+      const submissionData = new FormData();
+      submissionData.append('name', formData.name);
+      submissionData.append('email', formData.email);
+      submissionData.append('message', formData.message);
+      if (file) submissionData.append('document', file);
+
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      toast.success("Inquiry submitted successfully. We'll be in touch within 24 hours.", {
+        duration: 5000,
+      });
+
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
+      setFile(null);
+    } catch {
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const inputClass =
+    'w-full px-5 py-3.5 text-white bg-[#0d0d0d] border border-[#222] rounded-xl focus:border-brand-gold/60 focus:outline-none transition-colors duration-300 placeholder-gray-700 text-sm font-light';
+
   return (
-    <form onSubmit={handleSubmit} className="p-8 border rounded-xl bg-brand-dark border-gray-800 shadow-lg">
-      <div className="space-y-6">
-        
-        {/* Name Field */}
-        <div>
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-300">Your Name</label>
+    <form onSubmit={handleSubmit} className="space-y-7">
+
+      {/* Header */}
+      <div className="mb-8">
+        <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-brand-gold mb-3">
+          Step 01 — Discovery
+        </p>
+        <h3 className="text-2xl font-semibold text-white tracking-tight">
+          Tell us about your project
+        </h3>
+        <p className="text-gray-500 text-sm font-light mt-2 leading-relaxed">
+          We review every inquiry personally to determine the right approach for your needs.
+        </p>
+      </div>
+
+      {/* Identity Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="space-y-2">
+          <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 block">
+            Full Name
+          </label>
           <input
             type="text"
-            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            disabled={isSubmitting}
-            className="w-full px-4 py-3 text-white transition-colors border rounded-md bg-brand-black border-gray-700 focus:outline-none focus:border-brand-gold disabled:opacity-50"
-            placeholder="John Doe"
+            className={inputClass}
+            placeholder="Jane Smith"
           />
         </div>
-
-        {/* Email Field */}
-        <div>
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-300">Your Email</label>
+        <div className="space-y-2">
+          <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 block">
+            Work Email
+          </label>
           <input
             type="email"
-            id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            disabled={isSubmitting}
-            className="w-full px-4 py-3 text-white transition-colors border rounded-md bg-brand-black border-gray-700 focus:outline-none focus:border-brand-gold disabled:opacity-50"
-            placeholder="john@example.com"
+            className={inputClass}
+            placeholder="jane@company.com"
           />
         </div>
-
-        {/* Message Field */}
-        <div>
-          <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-300">Your Message</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            disabled={isSubmitting}
-            rows={5}
-            className="w-full px-4 py-3 text-white transition-colors border rounded-md bg-brand-black border-gray-700 focus:outline-none focus:border-brand-gold resize-none disabled:opacity-50"
-            placeholder="Tell us about your project..."
-          />
-        </div>
-
-        {/* Submit Button with Loading State */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="flex items-center justify-center w-full px-8 py-4 text-lg font-bold text-brand-black transition-all duration-300 bg-brand-gold rounded-md hover:bg-brand-gold-hover hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-        >
-          {isSubmitting ? (
-            <>
-              {/* SVG Loading Spinner */}
-              <svg className="w-5 h-5 mr-3 text-brand-black animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Sending...
-            </>
-          ) : (
-            "Send Message"
-          )}
-        </button>
-
       </div>
+
+      {/* Message */}
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 block">
+            Project Details
+          </label>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="text-[10px] font-mono uppercase tracking-[0.25em] text-gray-600 hover:text-brand-gold transition-colors duration-300"
+          >
+            Attach file
+          </button>
+        </div>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          rows={5}
+          className={`${inputClass} resize-none leading-relaxed`}
+          placeholder="Describe your current stack, the challenge you're facing, and what success looks like..."
+        />
+
+        {/* File Indicator */}
+        {file && (
+          <div className="flex items-center justify-between bg-[#0d0d0d] border border-[#222] rounded-xl px-4 py-3 mt-2">
+            <div className="flex items-center gap-3">
+              <div className="w-7 h-7 rounded-lg bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center flex-shrink-0">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 1.5h5.5L10 4v6.5H2V1.5z" stroke="#F2DA60" strokeWidth="1" strokeLinejoin="round"/>
+                  <path d="M7.5 1.5V4H10" stroke="#F2DA60" strokeWidth="1" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <p className="text-xs text-white font-medium truncate max-w-[180px]">{file.name}</p>
+                <p className="text-[10px] text-gray-600 mt-0.5">
+                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setFile(null)}
+              className="w-6 h-6 rounded-full hover:bg-white/5 flex items-center justify-center transition-colors text-gray-600 hover:text-white"
+            >
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </div>
+        )}
+
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className="hidden"
+          accept=".pdf,.doc,.docx,.png,.jpg,.zip"
+        />
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full btn-primary justify-center py-4 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
+      >
+        {isSubmitting ? (
+          <span className="flex items-center gap-3">
+            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"/>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+            </svg>
+            Submitting inquiry...
+          </span>
+        ) : (
+          'Submit for Strategic Audit'
+        )}
+      </button>
+
     </form>
   );
 }

@@ -1,39 +1,42 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer"
+import Footer from "@/components/layout/Footer";
+import ClientSpotlight from "@/components/layout/ClientSpotlight";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "Brolly Solutions",
-  description: "Empowering Businesses with Smart Digital Solutions",
+  title: "Brolly Solutions — Senior Engineering Collective",
+  description: "Boutique software engineering and tech advisory. We build reliable, scalable systems for businesses that demand excellence.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        
-        {/* Global Toast Provider styled to match the premium theme */}
-        <Toaster 
+      <body className="bg-brand-black text-white antialiased">
+        <ClientSpotlight>
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </ClientSpotlight>
+
+        <Toaster
           position="bottom-right"
           toastOptions={{
             style: {
-              background: '#171717', // brand-dark
+              background: '#111111',
               color: '#fff',
-              border: '1px solid #333',
+              border: '1px solid #222',
+              borderRadius: '12px',
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '14px',
             },
             success: {
               iconTheme: {
-                primary: '#D4AF37', // brand-gold
-                secondary: '#171717',
+                primary: '#F2DA60',
+                secondary: '#111111',
               },
             },
           }}
