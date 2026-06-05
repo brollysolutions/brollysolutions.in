@@ -8,12 +8,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { name: 'Home', href: '/' },
+  { name: 'Products', href: '/#products' },
   { name: 'Services', href: '/services' },
   { name: 'Our Team', href: '/about' },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  if (pathname === '/rag_chatbot') return null;
+
   const isActive = (path: string) => pathname === path;
 
   const [isScrolled, setIsScrolled] = useState(false);

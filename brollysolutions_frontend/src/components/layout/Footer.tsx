@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -17,7 +18,10 @@ const socialItems = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+
+  if (pathname === '/rag_chatbot') return null;
 
   return (
     <footer className="bg-[#050505] text-white border-t border-[#161616] pt-20 pb-8">
