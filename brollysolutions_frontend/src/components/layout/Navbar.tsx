@@ -15,7 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  if (pathname === '/rag_chatbot') return null;
+  if (pathname === '/chatbot') return null;
 
   const isActive = (path: string) => pathname === path;
 

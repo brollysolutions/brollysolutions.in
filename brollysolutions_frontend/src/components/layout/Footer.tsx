@@ -21,7 +21,7 @@ export default function Footer() {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
 
-  if (pathname === '/rag_chatbot') return null;
+  if (pathname === '/chatbot') return null;
 
   return (
     <footer className="bg-[#050505] text-white border-t border-[#161616] pt-20 pb-8">
