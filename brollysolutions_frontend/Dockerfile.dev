@@ -12,8 +12,8 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
-# Expose the development port specified in your package.json
+# Expose the development port
 EXPOSE 3002
 
-# Run the development server
-CMD ["npm", "run", "dev"]
+# Run the development server with host binding for Docker port mapping
+CMD ["npm", "run", "dev", "--", "--host"]
