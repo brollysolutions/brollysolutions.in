@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 
@@ -49,20 +47,20 @@ export default function LeadForm() {
   };
 
   const inputClass =
-    'w-full px-5 py-3.5 text-white bg-[#0d0d0d] border border-[#222] rounded-xl focus:border-brand-gold/60 focus:outline-none transition-colors duration-300 placeholder-gray-700 text-sm font-light';
+    'w-full px-5 py-3.5 text-black bg-white border border-zinc-300 rounded-xl focus:border-brand-gold/60 focus:outline-none transition-colors duration-300 placeholder-zinc-400 text-sm font-normal';
 
   return (
     <form onSubmit={handleSubmit} className="space-y-7">
 
       {/* Header */}
       <div className="mb-8">
-        <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-brand-gold mb-3">
+        <p className="text-xs font-mono uppercase tracking-[0.35em] text-brand-gold mb-3 font-semibold">
           Step 01 — Discovery
         </p>
-        <h3 className="text-2xl font-semibold text-white tracking-tight">
+        <h3 className="text-2xl font-bold text-black tracking-tight">
           Tell us about your project
         </h3>
-        <p className="text-gray-500 text-sm font-light mt-2 leading-relaxed">
+        <p className="text-zinc-700 text-sm font-normal mt-2 leading-relaxed">
           We review every inquiry personally to determine the right approach for your needs.
         </p>
       </div>
@@ -70,7 +68,7 @@ export default function LeadForm() {
       {/* Identity Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <div className="space-y-2">
-          <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 block">
+          <label className="text-xs font-mono uppercase tracking-[0.3em] text-black block font-semibold">
             Full Name
           </label>
           <input
@@ -84,7 +82,7 @@ export default function LeadForm() {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 block">
+          <label className="text-xs font-mono uppercase tracking-[0.3em] text-black block font-semibold">
             Work Email
           </label>
           <input
@@ -102,13 +100,13 @@ export default function LeadForm() {
       {/* Message */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <label className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 block">
+          <label className="text-xs font-mono uppercase tracking-[0.3em] text-black block font-semibold">
             Project Details
           </label>
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="text-[10px] font-mono uppercase tracking-[0.25em] text-gray-600 hover:text-brand-gold transition-colors duration-300"
+            className="text-xs font-mono uppercase tracking-[0.25em] text-black hover:text-brand-gold transition-colors duration-300 font-semibold"
           >
             Attach file
           </button>
@@ -125,17 +123,17 @@ export default function LeadForm() {
 
         {/* File Indicator */}
         {file && (
-          <div className="flex items-center justify-between bg-[#0d0d0d] border border-[#222] rounded-xl px-4 py-3 mt-2">
+          <div className="flex items-center justify-between bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 mt-2">
             <div className="flex items-center gap-3">
               <div className="w-7 h-7 rounded-lg bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center flex-shrink-0">
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 1.5h5.5L10 4v6.5H2V1.5z" stroke="#F2DA60" strokeWidth="1" strokeLinejoin="round"/>
-                  <path d="M7.5 1.5V4H10" stroke="#F2DA60" strokeWidth="1" strokeLinejoin="round"/>
+                  <path d="M2 1.5h5.5L10 4v6.5H2V1.5z" stroke="#c29b38" strokeWidth="1" strokeLinejoin="round"/>
+                  <path d="M7.5 1.5V4H10" stroke="#c29b38" strokeWidth="1" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div>
-                <p className="text-xs text-white font-medium truncate max-w-[180px]">{file.name}</p>
-                <p className="text-[10px] text-gray-600 mt-0.5">
+                <p className="text-xs text-black font-semibold truncate max-w-[180px]">{file.name}</p>
+                <p className="text-[10px] text-zinc-500 mt-0.5 font-medium">
                   {(file.size / 1024 / 1024).toFixed(2)} MB
                 </p>
               </div>
@@ -143,7 +141,7 @@ export default function LeadForm() {
             <button
               type="button"
               onClick={() => setFile(null)}
-              className="w-6 h-6 rounded-full hover:bg-white/5 flex items-center justify-center transition-colors text-gray-600 hover:text-white"
+              className="w-6 h-6 rounded-full hover:bg-black/5 flex items-center justify-center transition-colors text-zinc-400 hover:text-black"
             >
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>

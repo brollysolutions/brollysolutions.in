@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import LeadForm from "@/features/contact/components/LeadForm";
@@ -8,7 +6,7 @@ function SectionLabel({ children }: { children: string }) {
   return (
     <div className="inline-flex items-center gap-3 mb-6">
       <span className="w-7 h-px bg-brand-gold/40" />
-      <span className="text-[10px] font-mono uppercase tracking-[0.35em] text-brand-gold">
+      <span className="text-xs font-mono uppercase tracking-[0.35em] text-brand-gold font-semibold">
         {children}
       </span>
     </div>
@@ -33,9 +31,9 @@ const steps = [
   },
 ];
 
-export default function ContactPage() {
+export default function Contact() {
   return (
-    <div className="min-h-screen bg-brand-black text-white pt-40 pb-32 relative overflow-hidden">
+    <div className="min-h-screen bg-white text-black pt-28 pb-20 relative overflow-hidden">
 
       {/* Ambient glow */}
       <div
@@ -46,7 +44,7 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* ─── HEADER ─────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-end">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16 items-end">
           <div className="lg:col-span-8">
             <motion.div
               initial={{ opacity: 0, y: -12 }}
@@ -59,7 +57,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-6xl md:text-8xl font-bold tracking-tighter leading-none mt-2"
+              className="text-6xl md:text-8xl font-bold tracking-tighter leading-none mt-2 text-black"
             >
               Initiate <br />
               <span className="font-serif italic text-brand-gold">Dialogue.</span>
@@ -71,7 +69,7 @@ export default function ContactPage() {
             transition={{ duration: 1, delay: 0.3 }}
             className="lg:col-span-4 pb-2"
           >
-            <p className="text-gray-500 text-lg font-light leading-relaxed">
+            <p className="text-black text-lg font-normal leading-relaxed">
               Submit your project details below. We review every inquiry personally to determine if we're the right fit for your scaling needs.
             </p>
           </motion.div>
@@ -89,26 +87,26 @@ export default function ContactPage() {
           >
             {/* Process */}
             <div>
-              <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-gray-600 mb-7 pb-4 border-b border-[#1a1a1a]">
+              <p className="text-xs font-mono uppercase tracking-[0.35em] text-black mb-7 pb-4 border-b border-zinc-200 font-semibold">
                 The Audit Process
               </p>
               <ul className="space-y-0">
                 {steps.map((step, i) => (
                   <li
                     key={i}
-                    className="group border-b border-[#1a1a1a] py-7 relative overflow-hidden"
+                    className="group border-b border-zinc-200 py-6 relative overflow-hidden"
                   >
                     {/* Hover sweep */}
                     <div className="absolute inset-0 bg-gradient-to-r from-brand-gold/0 via-brand-gold/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms] ease-in-out pointer-events-none" />
                     <div className="relative z-10 flex gap-6 items-start">
-                      <span className="font-mono text-xs text-gray-700 group-hover:text-brand-gold transition-colors duration-300 pt-1 flex-shrink-0">
+                      <span className="font-mono text-sm text-black group-hover:text-brand-gold transition-colors duration-300 pt-1 flex-shrink-0 font-semibold">
                         {step.num}
                       </span>
                       <div>
-                        <h4 className="text-lg font-semibold tracking-tight text-gray-400 group-hover:text-white transition-colors duration-300 mb-2">
+                        <h4 className="text-xl font-bold tracking-tight text-black group-hover:text-brand-gold transition-colors duration-300 mb-2">
                           {step.title}
                         </h4>
-                        <p className="text-gray-600 text-sm font-light leading-relaxed group-hover:text-gray-500 transition-colors">
+                        <p className="text-black text-base font-normal leading-relaxed">
                           {step.desc}
                         </p>
                       </div>
@@ -119,23 +117,23 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6 border-t border-[#1a1a1a]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6 border-t border-zinc-200">
               <div>
-                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-700 mb-2.5">
+                <p className="text-xs font-mono uppercase tracking-[0.3em] text-black mb-2.5 font-semibold">
                   Direct Inquiry
                 </p>
                 <a
                   href="mailto:hello@brollysolutions.com"
-                  className="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-300 font-light"
+                  className="text-black text-base hover:text-brand-gold transition-colors duration-300 font-semibold border-b border-black pb-0.5"
                 >
                   hello@brollysolutions.com
                 </a>
               </div>
               <div>
-                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-700 mb-2.5">
+                <p className="text-xs font-mono uppercase tracking-[0.3em] text-black mb-2.5 font-semibold">
                   Operating Hours
                 </p>
-                <p className="text-gray-400 text-sm font-light">Mon — Sat, 9am — 6pm IST</p>
+                <p className="text-black text-base font-normal">Mon — Sat, 9am — 6pm IST</p>
               </div>
             </div>
           </motion.div>
@@ -148,7 +146,7 @@ export default function ContactPage() {
             className="lg:col-span-7"
           >
             {/* Single unified glass card */}
-            <div className="bg-brand-surface border border-[#1e1e1e] p-8 md:p-12 rounded-2xl relative overflow-hidden group">
+            <div className="bg-[#fafafa] border border-zinc-200 p-8 md:p-12 rounded-2xl relative overflow-hidden group">
               <div
                 className="absolute top-0 right-0 w-64 h-64 pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-700"
                 style={{ background: "radial-gradient(circle, rgba(242,218,96,0.06) 0%, transparent 70%)" }}
