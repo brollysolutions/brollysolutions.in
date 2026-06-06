@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@400;500&display=swap');
 
 @import "tailwindcss";
 
 @theme {
   /* Brand Colors */
-  --color-brand-black: #0a0a0a;
-  --color-brand-surface: #111111;
-  --color-brand-dark: #1a1a1a;
-  --color-brand-border: #222222;
-  --color-brand-gold: #F2DA60;
-  --color-brand-gold-hover: #F6E68E;
-  --color-brand-gold-dim: rgba(242, 218, 96, 0.08);
+  --color-brand-black: #ffffff;
+  --color-brand-surface: #fafafa;
+  --color-brand-dark: #f4f4f5;
+  --color-brand-border: #e4e4e7;
+  --color-brand-gold: #c29b38;
+  --color-brand-gold-hover: #a17f2a;
+  --color-brand-gold-dim: rgba(194, 155, 56, 0.06);
 
   /* Typography */
-  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
   --font-mono: 'DM Mono', ui-monospace, monospace;
 
@@ -29,20 +30,24 @@
 
   body {
     background-color: var(--color-brand-black);
-    color: white;
+    color: #09090b;
     font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #0a0a0a; }
-  ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: #F2DA60; }
+  ::-webkit-scrollbar-track { background: #ffffff; }
+  ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-gold); }
 
   /* Selection */
   ::selection {
-    background: #F2DA60;
-    color: #0a0a0a;
+    background: #c29b38;
+    color: #ffffff;
   }
 }
 
@@ -65,7 +70,7 @@
     display: block;
     width: 28px;
     height: 1px;
-    background: rgba(242, 218, 96, 0.4);
+    background: rgba(194, 155, 56, 0.4);
     flex-shrink: 0;
   }
 
@@ -79,19 +84,19 @@
     gap: 8px;
     padding: 14px 32px;
     background: var(--color-brand-gold);
-    color: #0a0a0a;
+    color: #ffffff;
     font-family: var(--font-sans);
     font-size: 14px;
     font-weight: 600;
     border-radius: 999px;
     transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(242, 218, 96, 0.2);
+    box-shadow: 0 4px 20px rgba(194, 155, 56, 0.15);
     letter-spacing: 0.01em;
   }
 
   .btn-primary:hover {
     background: var(--color-brand-gold-hover);
-    box-shadow: 0 0 30px rgba(242, 218, 96, 0.4);
+    box-shadow: 0 4px 30px rgba(194, 155, 56, 0.25);
     transform: translateY(-1px);
   }
 
@@ -101,31 +106,32 @@
     justify-content: center;
     gap: 8px;
     padding: 14px 32px;
-    border: 1px solid #333;
-    color: white;
+    border: 1px solid #d4d4d8;
+    color: #09090b;
     font-family: var(--font-sans);
     font-size: 14px;
     font-weight: 500;
     border-radius: 999px;
     transition: all 0.3s ease;
-    background: rgba(255,255,255,0.03);
+    background: rgba(0,0,0,0.01);
     letter-spacing: 0.01em;
   }
 
   .btn-secondary:hover {
     border-color: var(--color-brand-gold);
     color: var(--color-brand-gold);
+    background: rgba(194, 155, 56, 0.02);
   }
 
   .card {
     background: var(--color-brand-surface);
-    border: 1px solid #1e1e1e;
+    border: 1px solid var(--color-brand-border);
     border-radius: 16px;
     transition: border-color 0.4s ease;
   }
 
   .card:hover {
-    border-color: rgba(242, 218, 96, 0.2);
+    border-color: rgba(194, 155, 56, 0.3);
   }
 }
 
@@ -136,6 +142,6 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.1; transform: scale(1); }
-  50% { opacity: 0.2; transform: scale(1.15); }
+  0%, 100% { opacity: 0.05; transform: scale(1); }
+  50% { opacity: 0.1; transform: scale(1.15); }
 }

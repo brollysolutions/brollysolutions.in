@@ -1,8 +1,4 @@
-"use client";
-
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -18,43 +14,42 @@ const socialItems = [
 ];
 
 export default function Footer() {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const currentYear = new Date().getFullYear();
 
   if (pathname === '/chatbot') return null;
 
   return (
-    <footer className="bg-[#050505] text-white border-t border-[#161616] pt-20 pb-8">
+    <footer className="bg-[#f4f4f5] text-black border-t border-zinc-300 pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
 
           {/* Brand */}
-          <div className="md:col-span-5">
-            <Link href="/" className="inline-block mb-6 opacity-80 hover:opacity-100 transition-opacity">
-              <Image
-                src="/logo.png"
+          <div className="md:col-span-4">
+            <Link to="/" className="inline-block mb-6 opacity-90 hover:opacity-100 transition-opacity">
+              <img
+                src="/logo_black.png"
                 alt="Brolly Solutions"
-                width={148}
-                height={44}
                 className="h-8 w-auto object-contain"
+                style={{ filter: 'brightness(0)' }}
               />
             </Link>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xs font-light">
+            <p className="text-black text-base leading-relaxed max-w-sm font-normal">
               Boutique software engineering and tech advisory. We build reliable, scalable systems for businesses that demand excellence.
             </p>
           </div>
 
           {/* Nav */}
-          <div className="md:col-span-2 md:col-start-7">
-            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 mb-6">Navigation</p>
+          <div className="md:col-span-2 md:col-start-6">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-black font-semibold mb-6">Navigation</p>
             <ul className="space-y-3.5">
               {navItems.map((item) => (
                 <li key={item.label}>
                   <Link
-                    href={item.href}
-                    className="text-sm text-gray-500 hover:text-brand-gold transition-colors duration-300 font-light"
+                    to={item.href}
+                    className="text-base text-black hover:text-brand-gold transition-colors duration-300 font-normal"
                   >
                     {item.label}
                   </Link>
@@ -65,13 +60,13 @@ export default function Footer() {
 
           {/* Social */}
           <div className="md:col-span-2">
-            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 mb-6">Social</p>
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-black font-semibold mb-6">Social</p>
             <ul className="space-y-3.5">
               {socialItems.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className="text-sm text-gray-500 hover:text-brand-gold transition-colors duration-300 font-light"
+                    className="text-base text-black hover:text-brand-gold transition-colors duration-300 font-normal"
                   >
                     {item.label}
                   </a>
@@ -82,8 +77,8 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="md:col-span-3">
-            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-600 mb-6">Contact</p>
-            <ul className="space-y-3.5 text-sm font-light text-gray-500">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-black font-semibold mb-6">Contact</p>
+            <ul className="space-y-3.5 text-base font-normal text-black">
               <li>
                 <a
                   href="mailto:hello@brollysolutions.com"
@@ -95,8 +90,8 @@ export default function Footer() {
               <li>Mon — Sat, 9am — 6pm IST</li>
               <li className="pt-2">
                 <Link
-                  href="/contact"
-                  className="text-white text-sm font-medium border-b border-gray-700 pb-1 hover:text-brand-gold hover:border-brand-gold transition-all duration-300"
+                  to="/contact"
+                  className="text-black text-base font-semibold border-b border-black pb-1 hover:text-brand-gold hover:border-brand-gold transition-all duration-300"
                 >
                   Start a Project
                 </Link>
@@ -106,15 +101,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-[#161616]">
-          <p className="text-xs text-gray-700 font-light">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-zinc-300">
+          <p className="text-sm text-black font-normal">
             © {currentYear} Brolly Solutions. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs text-gray-700 hover:text-gray-400 transition-colors">
+            <Link to="/privacy" className="text-sm text-black hover:text-brand-gold transition-colors font-normal">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-xs text-gray-700 hover:text-gray-400 transition-colors">
+            <Link to="/terms" className="text-sm text-black hover:text-brand-gold transition-colors font-normal">
               Terms of Service
             </Link>
           </div>

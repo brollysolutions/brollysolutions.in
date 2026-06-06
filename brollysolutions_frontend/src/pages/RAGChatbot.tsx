@@ -1,6 +1,4 @@
-"use client";
-
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -141,6 +139,7 @@ function extractStats(bullets: string[]) {
   return statsFound;
 }
 
+// ── Extract tools, trainer name etc ──
 function extractTools(bullets: string[]) {
   const tools: string[] = [];
   const toolKeywords = [
@@ -277,30 +276,30 @@ function CourseSectionCard({ section }: { section: Section }) {
   const tools = extractTools(section.bullets);
 
   return (
-    <div className="bg-[#22263a] border border-white/10 rounded-xl overflow-hidden shadow-sm">
-      <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#1a1d27]/40">
+    <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm animate-fade-in">
+      <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-slate-50/80">
         <SectionIcon icon={icon} />
-        <span className={`${fontSans} font-medium text-[13px] text-[#f0f0f5]`}>{section.title}</span>
-        <span className="ml-auto text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-purple-500/15 text-[#a78bfa] border border-[#6c63ff]/20">
+        <span className={`${fontSans} font-bold text-[19px] text-slate-900`}>{section.title}</span>
+        <span className="ml-auto text-[13.5px] font-semibold px-2.5 py-0.5 rounded-full bg-purple-50 text-[#6c63ff] border border-[#6c63ff]/20">
           35+ modules
         </span>
       </div>
       {stats.length > 0 && (
-        <div className="grid grid-cols-3 gap-[1px] bg-white/5 border-b border-white/5">
+        <div className="grid grid-cols-3 gap-[1px] bg-slate-950 border-b border-slate-950">
           {stats.map((s, idx) => (
-            <div key={idx} className="bg-[#22263a] py-3 text-center px-2">
-              <div className={`${fontSans} font-semibold text-lg text-[#f0f0f5]`}>{s.val}</div>
-              <div className="text-[11px] text-[#8b8fa8] mt-0.5">{s.lbl}</div>
+            <div key={idx} className="bg-white py-3.5 text-center px-2">
+              <div className={`${fontSans} font-extrabold text-3xl text-slate-900`}>{s.val}</div>
+              <div className="text-[15px] text-slate-600 mt-0.5 font-semibold">{s.lbl}</div>
             </div>
           ))}
         </div>
       )}
       {tools.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 p-3.5">
+        <div className="flex flex-wrap gap-2 p-4 bg-white">
           {tools.map((t, idx) => (
             <span
               key={idx}
-              className="text-[12px] px-2.5 py-0.5 rounded-full border border-white/10 text-[#8b8fa8] bg-white/[0.03]"
+              className="text-[15.5px] px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 bg-slate-50 font-semibold"
             >
               {t}
             </span>
@@ -316,31 +315,31 @@ function TrainerSectionCard({ section }: { section: Section }) {
   const trainer = extractTrainer(section.bullets);
 
   return (
-    <div className="bg-[#22263a] border border-white/10 rounded-xl overflow-hidden shadow-sm">
-      <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#1a1d27]/40">
+    <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm animate-fade-in">
+      <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-slate-50/80">
         <SectionIcon icon={icon} />
-        <span className={`${fontSans} font-medium text-[13px] text-[#f0f0f5]`}>{section.title}</span>
+        <span className={`${fontSans} font-bold text-[19px] text-slate-900`}>{section.title}</span>
       </div>
       {trainer ? (
-        <div className="flex items-center gap-3 p-3.5">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6c63ff] to-[#2dd4bf] text-white font-semibold text-[13px] flex items-center justify-center shrink-0">
+        <div className="flex items-center gap-4 p-4.5 bg-white">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#6c63ff] to-[#2dd4bf] text-white font-extrabold text-[15px] flex items-center justify-center shrink-0">
             {trainer.name
               .split(" ")
               .map((w) => w[0])
               .join("")}
           </div>
           <div className="flex flex-col">
-            <p className="text-[14px] font-medium text-[#f0f0f5]">{trainer.name}</p>
-            <span className="text-[12px] text-[#8b8fa8] leading-tight mt-0.5">
+            <p className="text-[19px] font-bold text-slate-900">{trainer.name}</p>
+            <span className="text-[15.5px] text-slate-707 text-slate-700 leading-relaxed mt-1 font-semibold">
               {trainer.exp} experience · SEO, Google Ads, Social Media, WordPress, Canva
             </span>
           </div>
         </div>
       ) : (
-        <div className="p-3.5 flex flex-col gap-2">
+        <div className="p-4.5 flex flex-col gap-3 bg-white">
           {section.bullets.map((b, idx) => (
-            <div key={idx} className="flex items-start gap-2 text-[13px] text-[#cccde0] leading-relaxed">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] shrink-0 mt-2" />
+            <div key={idx} className="flex items-start gap-3 text-[18px] text-slate-800 leading-relaxed font-normal">
+              <span className="w-2 h-2 rounded-full bg-brand-gold shrink-0 mt-2.5" />
               <span>{b}</span>
             </div>
           ))}
@@ -350,23 +349,24 @@ function TrainerSectionCard({ section }: { section: Section }) {
   );
 }
 
+// Re-map Placement section to use a white background card with a slate-950 black border
 function PlacementSectionCard({ section }: { section: Section }) {
   const icon = iconFor(section.title);
 
   return (
-    <div className="bg-[#22263a] border border-white/10 rounded-xl overflow-hidden shadow-sm">
-      <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#1a1d27]/40">
+    <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm animate-fade-in">
+      <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-slate-50/80">
         <SectionIcon icon={icon} />
-        <span className={`${fontSans} font-medium text-[13px] text-[#f0f0f5]`}>{section.title}</span>
-        <span className="ml-auto text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-green-500/12 text-[#4ade80] border border-green-500/20">
+        <span className={`${fontSans} font-bold text-[19px] text-slate-900`}>{section.title}</span>
+        <span className="ml-auto text-[13.5px] font-bold px-2.5 py-0.5 rounded-full bg-green-50 text-green-700 border border-green-200">
           100% support
         </span>
       </div>
-      <div className="p-3.5 flex flex-col gap-2">
+      <div className="p-4.5 flex flex-col gap-3 bg-white">
         {section.bullets.map((b, idx) => (
-          <div key={idx} className="flex items-center gap-2.5 text-[13px] text-[#cccde0]">
-            <div className="w-6 h-6 rounded-md bg-green-500/12 flex items-center justify-center shrink-0">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2">
+          <div key={idx} className="flex items-center gap-3 text-[18px] text-slate-800 font-normal">
+            <div className="w-7 h-7 rounded-md bg-green-50 flex items-center justify-center shrink-0">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
@@ -382,15 +382,15 @@ function DefaultSectionCard({ section }: { section: Section }) {
   const icon = iconFor(section.title);
 
   return (
-    <div className="bg-[#22263a] border border-white/10 rounded-xl overflow-hidden shadow-sm">
-      <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#1a1d27]/40">
+    <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm animate-fade-in">
+      <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-slate-50/80">
         <SectionIcon icon={icon} />
-        <span className={`${fontSans} font-medium text-[13px] text-[#f0f0f5]`}>{section.title}</span>
+        <span className={`${fontSans} font-bold text-[19px] text-slate-900`}>{section.title}</span>
       </div>
-      <div className="p-3.5 flex flex-col gap-2">
+      <div className="p-4.5 flex flex-col gap-3 bg-white">
         {section.bullets.map((b, idx) => (
-          <div key={idx} className="flex items-start gap-2 text-[13px] text-[#cccde0] leading-relaxed">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] shrink-0 mt-2" />
+          <div key={idx} className="flex items-start gap-3 text-[18px] text-slate-800 leading-relaxed font-normal">
+            <span className="w-2 h-2 rounded-full bg-brand-gold shrink-0 mt-2.5" />
             <span>{b}</span>
           </div>
         ))}
@@ -455,25 +455,25 @@ function QACard({ section }: { section: Section }) {
       .filter((s) => s.length > 3);
 
     return (
-      <div className="bg-[#22263a] border border-[#6c63ff]/30 rounded-xl overflow-hidden shadow-sm">
-        <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#6c63ff]/5">
+      <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm animate-fade-in">
+        <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-[#6c63ff]/5">
           <SectionIcon icon={iconCfg} />
-          <span className="font-sans font-medium text-[13px] text-[#f0f0f5]">Direct answer</span>
-          <span className="ml-auto text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-purple-500/15 text-[#a78bfa] border border-[#6c63ff]/20">
+          <span className="font-sans font-bold text-[19px] text-slate-900">Direct answer</span>
+          <span className="ml-auto text-[13.5px] font-bold px-2.5 py-0.5 rounded-full bg-purple-50 text-[#6c63ff] border border-[#6c63ff]/20">
             {badge}
           </span>
         </div>
-        <div className="p-3.5 flex flex-col gap-2">
+        <div className="p-4.5 flex flex-col gap-3 bg-white">
           {lines.length > 1 ? (
             lines.map((l, idx) => (
-              <div key={idx} className="flex items-start gap-2 text-[13px] text-[#cccde0] leading-relaxed">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#a78bfa] shrink-0 mt-2" />
+              <div key={idx} className="flex items-start gap-3 text-[18px] text-slate-800 leading-relaxed font-normal">
+                <span className="w-2 h-2 rounded-full bg-[#a78bfa] shrink-0 mt-2.5" />
                 <span dangerouslySetInnerHTML={{ __html: cleanMd(l) }} />
               </div>
             ))
           ) : (
             <div
-              className="text-[14px] text-[#f0f0f5] leading-relaxed"
+              className="text-[18px] text-slate-800 leading-relaxed font-normal"
               dangerouslySetInnerHTML={{ __html: cleanMd(bodyText) }}
             />
           )}
@@ -489,18 +489,18 @@ function QACard({ section }: { section: Section }) {
       .filter((s) => s.length > 4);
 
     return (
-      <div className="bg-[#22263a] border border-white/10 rounded-xl overflow-hidden shadow-sm">
-        <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#1a1d27]/40">
+      <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm animate-fade-in">
+        <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-slate-50/80">
           <SectionIcon icon={iconCfg} />
-          <span className="font-sans font-medium text-[13px] text-[#f0f0f5]">More details</span>
-          <span className="ml-auto text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-teal-500/12 text-[#2dd4bf] border border-teal-500/20">
+          <span className="font-sans font-bold text-[19px] text-slate-900">More details</span>
+          <span className="ml-auto text-[13.5px] font-bold px-2.5 py-0.5 rounded-full bg-teal-50 text-[#2dd4bf] border border-teal-500/20">
             {badge}
           </span>
         </div>
-        <div className="p-3.5 flex flex-col gap-2">
+        <div className="p-4.5 flex flex-col gap-3 bg-white">
           {lines.map((l, idx) => (
-            <div key={idx} className="flex items-start gap-2 text-[13px] text-[#cccde0] leading-relaxed">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] shrink-0 mt-2" />
+            <div key={idx} className="flex items-start gap-3 text-[18px] text-slate-705 text-slate-700 leading-relaxed font-normal">
+              <span className="w-2 h-2 rounded-full bg-[#2dd4bf] shrink-0 mt-2.5" />
               <span>{l}</span>
             </div>
           ))}
@@ -517,7 +517,7 @@ function QACard({ section }: { section: Section }) {
           <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
           <polyline points="14 2 14 8 20 8" />
         </svg>
-        <span className="text-[12px] text-[#8b8fa8]">{src}</span>
+        <span className="text-[15.5px] text-slate-600 font-semibold">{src}</span>
       </div>
     );
   }
@@ -525,44 +525,45 @@ function QACard({ section }: { section: Section }) {
   return <DefaultSectionCard section={section} />;
 }
 
+// Re-map ContactCard to use white background with slate-950 black border
 function ContactCard({ contactInfo }: { contactInfo: ContactInfo }) {
   const phone = contactInfo.phone_numbers?.join(", ") || "";
   const wa = contactInfo.whatsapp || "";
 
   return (
-    <div className="bg-[#22263a] border border-white/10 rounded-xl overflow-hidden shadow-sm mt-1">
-      <div className="flex items-center gap-2 px-3.5 py-3 border-b border-white/5 bg-[#1a1d27]/40">
-        <div className="w-6 h-6 rounded-md bg-teal-500/15 flex items-center justify-center shrink-0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" strokeWidth="1.8" className="w-[13px] h-[13px]">
+    <div className="bg-white border-2 border-slate-950 rounded-xl overflow-hidden shadow-sm mt-1 animate-fade-in">
+      <div className="flex items-center gap-2.5 px-4.5 py-4 border-b border-slate-950 bg-slate-50/80">
+        <div className="w-6 h-6 rounded-md bg-teal-50 flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0d9488" strokeWidth="1.8" className="w-[13px] h-[13px]">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
           </svg>
         </div>
-        <span className="font-sans font-medium text-[13px] text-[#f0f0f5]">Contact us</span>
+        <span className="font-sans font-bold text-[19px] text-slate-900">Contact us</span>
       </div>
-      <div className="p-3.5 flex flex-col gap-3">
+      <div className="p-4.5 flex flex-col gap-4 bg-white">
         {phone && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-2.5">
-            <span className="text-[13px] text-[#8b8fa8]">
-              <strong className="text-[#f0f0f5] font-semibold">Phone:</strong> {phone}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 border-b border-slate-100 pb-3.5">
+            <span className="text-[17px] text-slate-600">
+              <strong className="text-slate-800 font-bold">Phone:</strong> {phone}
             </span>
             <a
               href={`tel:${phone.split(",")[0].trim()}`}
-              className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-[#6c63ff]/15 hover:bg-[#6c63ff]/25 border border-[#6c63ff]/20 text-[#a78bfa] text-center transition-all duration-200"
+              className="px-4.5 py-2 rounded-lg text-xs font-bold bg-[#6c63ff]/10 hover:bg-[#6c63ff]/20 border border-[#6c63ff]/20 text-[#6c63ff] text-center transition-all duration-200"
             >
               Call Now
             </a>
           </div>
         )}
         {wa && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span className="text-[13px] text-[#8b8fa8]">
-              <strong className="text-[#f0f0f5] font-semibold">WhatsApp:</strong> {wa}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
+            <span className="text-[17px] text-slate-600">
+              <strong className="text-slate-800 font-bold">WhatsApp:</strong> {wa}
             </span>
             <a
               href={`https://wa.me/${wa.replace(/[^0-9]/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-1.5 rounded-lg text-xs font-semibold bg-green-500/12 hover:bg-green-500/20 border border-green-500/20 text-[#25d366] text-center transition-all duration-200"
+              className="px-4.5 py-2 rounded-lg text-xs font-bold bg-green-50 hover:bg-green-100 border border-green-200 text-green-700 text-center transition-all duration-200"
             >
               WhatsApp Us
             </a>
@@ -577,17 +578,17 @@ function BotResponse({ answer, contactInfo }: { answer: string; contactInfo?: Co
   const parsed = parseSections(answer);
 
   return (
-    <div className="max-w-[92%] flex flex-col gap-2.5">
+    <div className="max-w-[92%] flex flex-col gap-3.5">
       {parsed.format === "plain" ? (
         <div
-          className="text-[#f0f0f5] text-[14px] leading-relaxed"
+          className="text-slate-800 text-[18px] leading-relaxed font-normal"
           dangerouslySetInnerHTML={{ __html: cleanMd(parsed.text || "") }}
         />
       ) : parsed.format === "qa" ? (
         <>
           {parsed.text && (
             <div
-              className="text-[#f0f0f5] text-[14px] leading-relaxed mb-2"
+              className="text-slate-800 text-[18px] leading-relaxed mb-2 font-normal"
               dangerouslySetInnerHTML={{ __html: cleanMd(parsed.text) }}
             />
           )}
@@ -597,13 +598,13 @@ function BotResponse({ answer, contactInfo }: { answer: string; contactInfo?: Co
         <>
           {parsed.text ? (
             <div
-              className="text-[#f0f0f5] text-[14px] leading-relaxed mb-2"
+              className="text-slate-800 text-[18px] leading-relaxed mb-2 font-normal"
               dangerouslySetInnerHTML={{ __html: cleanMd(parsed.text) }}
             />
           ) : (
-            <div className="text-[#8b8fa8] text-[14px] leading-relaxed">
+            <div className="text-slate-600 text-[18px] leading-relaxed font-normal">
               Here's what I found about{" "}
-              <strong className="text-[#f0f0f5] font-semibold">Digital Brolly's Digital Marketing program:</strong>
+              <strong className="text-slate-800 font-semibold">Digital Brolly's Digital Marketing program:</strong>
             </div>
           )}
           {parsed.sections?.map((sec, idx) => {
@@ -622,7 +623,7 @@ function BotResponse({ answer, contactInfo }: { answer: string; contactInfo?: Co
         </>
       )}
       {contactInfo && <ContactCard contactInfo={contactInfo} />}
-      <div className="text-[#8b8fa8] text-[12px] mt-1">Need more details? Ask me anything!</div>
+      <div className="text-slate-500 text-[15.5px] mt-1.5 font-semibold">Need more details? Ask me anything!</div>
     </div>
   );
 }
@@ -697,20 +698,20 @@ export default function RAGChatbot() {
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-[#0f1117] overflow-hidden">
+    <div className="relative flex items-center justify-center min-h-screen bg-slate-50 overflow-hidden">
       {/* Background radial glows */}
-      <div className="fixed top-[-30%] left-[-10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(108,99,255,0.12)_0%,transparent_70%)] pointer-events-none" />
-      <div className="fixed bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(45,212,191,0.08)_0%,transparent_70%)] pointer-events-none" />
+      <div className="fixed top-[-30%] left-[-10%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(108,99,255,0.06)_0%,transparent_70%)] pointer-events-none" />
+      <div className="fixed bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(45,212,191,0.04)_0%,transparent_70%)] pointer-events-none" />
 
       {/* Main chat window container */}
-      <div className="relative w-full max-w-[740px] h-screen max-h-screen flex flex-col bg-[#1a1d27] border-x border-white/10 z-10">
+      <div className="relative w-full max-w-[740px] h-screen max-h-screen flex flex-col bg-white border-x border-slate-200/80 z-10">
         
         {/* Header */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10 bg-[#1a1d27] shrink-0">
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-slate-200/80 bg-white shrink-0">
           {/* Back button */}
           <Link
-            href="/"
-            className="p-2 -ml-2 rounded-full hover:bg-white/5 border border-transparent hover:border-white/10 text-white/50 hover:text-white transition-all duration-200"
+            to="/"
+            className="p-2 -ml-2 rounded-full hover:bg-slate-100 border border-transparent hover:border-slate-200 text-slate-500 hover:text-slate-800 transition-all duration-200"
             title="Back to Home"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
@@ -728,15 +729,15 @@ export default function RAGChatbot() {
             </svg>
           </div>
           <div className="flex flex-col">
-            <h2 className="font-sans font-semibold text-[15px] text-[#f0f0f5] leading-none">
+            <h2 className="font-sans font-semibold text-[17px] text-slate-900 leading-none">
               Digital Brolly Assistant
             </h2>
-            <div className="flex items-center gap-1.5 text-xs text-[#8b8fa8] mt-1.5 leading-none">
+            <div className="flex items-center gap-1.5 text-[14px] text-slate-500 mt-1.5 leading-none">
               <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
               Online · Ready to help
             </div>
           </div>
-          <div className="ml-auto text-[11px] font-medium px-2.5 py-1 rounded-full bg-[#6c63ff]/15 text-[#a78bfa] border border-[#6c63ff]/30">
+          <div className="ml-auto text-[13px] font-semibold px-2.5 py-1 rounded-full bg-[#6c63ff]/8 text-[#6c63ff] border border-[#6c63ff]/20">
             RAG Powered
           </div>
         </div>
@@ -755,11 +756,11 @@ export default function RAGChatbot() {
               >
                 {/* Avatar */}
                 {msg.sender === "user" ? (
-                  <div className="w-8 h-8 rounded-full bg-[#22263a] text-[#8b8fa8] border border-white/10 text-xs font-semibold font-sans flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-slate-100 text-slate-600 border border-slate-200 text-xs font-semibold font-sans flex items-center justify-center shrink-0">
                     You
                   </div>
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#6c63ff] to-[#2dd4bf] flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#6c63ff] to-[#2dd4bf] flex items-center justify-center shrink-0">
                     <svg viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.6" className="w-3.5 h-3.5">
                       <rect x="2" y="8" width="16" height="9" rx="2" />
                       <path d="M10 8V5" />
@@ -770,11 +771,11 @@ export default function RAGChatbot() {
 
                 {/* Bubble */}
                 {msg.sender === "user" ? (
-                  <div className="bg-gradient-to-br from-[#6c63ff] to-[#7c3aed] text-white px-4 py-2.5 rounded-[18px] rounded-br-[4px] text-[14px] leading-relaxed max-w-[70%] shadow-sm">
+                  <div className="bg-gradient-to-br from-[#6c63ff] to-[#7c3aed] text-white px-4.5 py-3 rounded-[20px] rounded-br-[4px] text-[18px] leading-relaxed max-w-[72%] shadow-sm">
                     {msg.text}
                   </div>
                 ) : msg.isError ? (
-                  <div className="text-[13px] text-[#f87171] px-4 py-2.5 bg-red-500/10 border border-red-500/20 rounded-lg max-w-[92%] shadow-sm">
+                  <div className="text-[16.5px] text-[#f87171] px-4 py-2.5 bg-red-500/10 border border-red-500/20 rounded-lg max-w-[92%] shadow-sm">
                     {msg.text}
                   </div>
                 ) : (
@@ -789,7 +790,7 @@ export default function RAGChatbot() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex gap-3 items-start"
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#6c63ff] to-[#2dd4bf] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#6c63ff] to-[#2dd4bf] flex items-center justify-center shrink-0">
                   <svg viewBox="0 0 20 20" fill="none" stroke="#fff" strokeWidth="1.6" className="w-3.5 h-3.5">
                     <rect x="2" y="8" width="16" height="9" rx="2" />
                     <path d="M10 8V5" />
@@ -797,9 +798,9 @@ export default function RAGChatbot() {
                   </svg>
                 </div>
                 <div className="bg-transparent py-2 px-1 flex gap-1.5 items-center">
-                  <span className="w-2 h-2 rounded-full bg-[#8b8fa8] animate-[bounce_1.2s_infinite]" />
-                  <span className="w-2 h-2 rounded-full bg-[#8b8fa8] animate-[bounce_1.2s_infinite_0.2s]" />
-                  <span className="w-2 h-2 rounded-full bg-[#8b8fa8] animate-[bounce_1.2s_infinite_0.4s]" />
+                  <span className="w-2 h-2 rounded-full bg-slate-400 animate-[bounce_1.2s_infinite]" />
+                  <span className="w-2 h-2 rounded-full bg-slate-400 animate-[bounce_1.2s_infinite_0.2s]" />
+                  <span className="w-2 h-2 rounded-full bg-slate-400 animate-[bounce_1.2s_infinite_0.4s]" />
                 </div>
               </motion.div>
             )}
@@ -809,13 +810,13 @@ export default function RAGChatbot() {
         </div>
 
         {/* Suggestion Pills */}
-        <div className="flex flex-wrap gap-2 px-5 py-2.5 bg-[#1a1d27] border-t border-white/5 shrink-0 overflow-x-auto">
+        <div className="flex flex-wrap gap-2 px-5 py-3 bg-white border-t border-slate-100 shrink-0 overflow-x-auto">
           {["Course Syllabus", "Course Fees", "Placement Support", "Trainer Info"].map((prompt) => (
             <button
               key={prompt}
               onClick={() => handleSend(prompt)}
               disabled={isLoading}
-              className="text-xs font-sans px-3 py-1.5 rounded-full border border-white/10 hover:border-[#6c63ff]/50 bg-[#22263a] text-[#8b8fa8] hover:text-[#f0f0f5] hover:bg-[#6c63ff]/10 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shrink-0 cursor-pointer"
+              className="text-[16px] font-sans px-4 py-2.5 rounded-full border border-slate-200 hover:border-[#6c63ff]/40 bg-slate-50 text-slate-600 hover:text-[#6c63ff] hover:bg-[#6c63ff]/5 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shrink-0 cursor-pointer"
             >
               {prompt}
             </button>
@@ -823,7 +824,7 @@ export default function RAGChatbot() {
         </div>
 
         {/* Input area */}
-        <div className="flex gap-3 items-center px-4 py-3 border-t border-white/10 bg-[#1a1d27] shrink-0">
+        <div className="flex gap-3 items-center px-4 py-3 border-t border-slate-200/80 bg-white shrink-0">
           <input
             type="text"
             value={inputValue}
@@ -832,7 +833,7 @@ export default function RAGChatbot() {
               if (e.key === "Enter") handleSend();
             }}
             placeholder="Ask about fees, schedule, admissions…"
-            className="flex-grow px-4 py-2.5 border border-white/10 rounded-full text-sm font-sans bg-[#22263a] text-[#f0f0f5] placeholder-[#8b8fa8] outline-none focus:border-[#6c63ff]/50 transition-colors duration-200"
+            className="flex-grow px-5 py-3 border border-slate-200 bg-slate-50 text-slate-800 placeholder-slate-400 outline-none focus:border-[#6c63ff]/50 focus:bg-white transition-all duration-200 rounded-full text-[18px] font-sans"
             disabled={isLoading}
           />
           <button
