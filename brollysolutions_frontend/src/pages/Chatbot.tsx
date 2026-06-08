@@ -37,7 +37,10 @@ const fontSans = "font-sans";
 
 // ── Clean markdown bold/italic from text ──
 function cleanMd(text: string): string {
-  return text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>").trim();
+  const cleaned = text
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/[\ufffd]\??[\ufffd]?/g, "₹");
+  return cleaned.trim();
 }
 
 function stripMd(text: string): string {
@@ -573,54 +576,16 @@ function ContactCard({ contactInfo }: { contactInfo: ContactInfo }) {
 }
 
 function BotResponse({ answer, contactInfo }: { answer: string; contactInfo?: ContactInfo }) {
-  const parsed = parseSections(answer);
-
   return (
-    <div className="max-w-[92%] flex flex-col gap-3.5">
-      {parsed.format === "plain" ? (
+    <div className="max-w-[85%] flex flex-col gap-3.5">
+      <div className="bg-slate-50 border border-slate-200/60 text-slate-800 px-5 py-3.5 rounded-[20px] rounded-bl-[4px] text-[17px] leading-relaxed shadow-sm whitespace-pre-wrap">
         <div
-          className="text-slate-800 text-[18px] leading-relaxed font-normal"
-          dangerouslySetInnerHTML={{ __html: cleanMd(parsed.text || "") }}
+          className="font-normal"
+          dangerouslySetInnerHTML={{ __html: cleanMd(answer) }}
         />
-      ) : parsed.format === "qa" ? (
-        <>
-          {parsed.text && (
-            <div
-              className="text-slate-800 text-[18px] leading-relaxed mb-2 font-normal"
-              dangerouslySetInnerHTML={{ __html: cleanMd(parsed.text) }}
-            />
-          )}
-          {parsed.sections?.map((sec, idx) => <QACard key={idx} section={sec} />)}
-        </>
-      ) : (
-        <>
-          {parsed.text ? (
-            <div
-              className="text-slate-800 text-[18px] leading-relaxed mb-2 font-normal"
-              dangerouslySetInnerHTML={{ __html: cleanMd(parsed.text) }}
-            />
-          ) : (
-            <div className="text-slate-600 text-[18px] leading-relaxed font-normal">
-              Here's what I found about <strong className="text-slate-800 font-semibold">Digital Brolly's Digital Marketing program:</strong>
-            </div>
-          )}
-          {parsed.sections?.map((sec, idx) => {
-            const tl = sec.title.toLowerCase();
-            if (tl.includes("placement") || tl.includes("career")) {
-              return <PlacementSectionCard key={idx} section={sec} />;
-            }
-            if (tl.includes("course") || tl.includes("content") || tl.includes("module")) {
-              return <CourseSectionCard key={idx} section={sec} />;
-            }
-            if (tl.includes("trainer") || tl.includes("expert")) {
-              return <TrainerSectionCard key={idx} section={sec} />;
-            }
-            return <DefaultSectionCard key={idx} section={sec} />;
-          })}
-        </>
-      )}
+      </div>
       {contactInfo && <ContactCard contactInfo={contactInfo} />}
-      <div className="text-slate-500 text-[15.5px] mt-1.5 font-semibold">Need more details? Ask me anything!</div>
+      <div className="text-slate-500 text-[14px] mt-1.5 font-semibold pl-3">Need more details? Ask me anything!</div>
     </div>
   );
 }
@@ -658,7 +623,7 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://brollysolutions.in/chatbot/chat", {
+      const response = await fetch("/rag_chatbot/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),
@@ -685,7 +650,7 @@ export default function Chatbot() {
         {
           id: `err-${Date.now()}`,
           sender: "bot",
-          text: "Could not reach the server. Make sure FastAPI is running at the configured URL.",
+          text: "Could not reach the server. Make sure the RAG Chatbot FastAPI service is running.",
           isError: true,
         },
       ]);

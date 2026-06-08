@@ -11,5 +11,11 @@ export default defineConfig({
   },
   server: {
     port: 3002,
+    proxy: {
+      '/rag_chatbot': {
+        target: 'https://brollysolutions.in',
+        changeOrigin: true,
+      },
+    },
   },
 });
