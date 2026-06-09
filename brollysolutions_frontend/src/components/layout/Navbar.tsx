@@ -82,8 +82,8 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-5 z-50">
-            <Link
-              to="/login"
+            <a
+              href="https://brollysolutions.in/login"
               className="flex items-center gap-2 text-[15px] text-black hover:text-brand-gold border border-zinc-400 hover:border-brand-gold px-4 py-2 rounded-full transition-all duration-300 bg-white hover:bg-zinc-50 font-bold"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ export default function Navbar() {
                 <path d="M1.5 12.5C1.5 10.015 4.015 8 7 8s5.5 2.015 5.5 4.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
               </svg>
               <span>Login</span>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -161,8 +161,8 @@ export default function Navbar() {
                 >
                   Get a Free Tech Audit
                 </Link>
-                <Link
-                  to="/login"
+                <a
+                  href="https://brollysolutions.in/login"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-3 text-[15px] text-black hover:text-brand-gold border border-zinc-400 rounded-full transition-all duration-300 bg-white hover:bg-zinc-50 font-bold"
                 >
@@ -171,7 +171,7 @@ export default function Navbar() {
                     <path d="M1.5 12.5C1.5 10.015 4.015 8 7 8s5.5 2.015 5.5 4.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"/>
                   </svg>
                   <span>Login</span>
-                </Link>
+                </a>
               </motion.div>
             </div>
           </motion.div>
