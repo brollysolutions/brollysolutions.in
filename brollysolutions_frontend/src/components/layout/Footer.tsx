@@ -1,120 +1,113 @@
-import { Link, useLocation } from 'react-router-dom';
+/**
+ * Footer — corporate footer: brand blurb, quick links, services, contact,
+ * social icons and a legal bar. Cream tone to match the light theme.
+ */
+import { Link } from 'react-router-dom';
+import { COMPANY, NAV_LINKS, SERVICES } from '@/data/content';
+import Icon, { type IconName } from '@/components/ui/Icon';
 
-const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Our Team', href: '/about' },
-  { label: 'Free Audit', href: '/contact' },
-];
-
-const socialItems = [
-  { label: 'LinkedIn', href: '#' },
-  { label: 'GitHub', href: '#' },
-  { label: 'Twitter', href: '#' },
+const socials: { label: string; icon: IconName; href: string }[] = [
+  { label: 'LinkedIn', icon: 'linkedin', href: '#' },
+  { label: 'Twitter', icon: 'twitter', href: '#' },
+  { label: 'GitHub', icon: 'github', href: '#' },
 ];
 
 export default function Footer() {
-  const { pathname } = useLocation();
-  const currentYear = new Date().getFullYear();
-
-  if (pathname === '/chatbot') return null;
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#f4f4f5] text-black border-t border-zinc-300 pt-20 pb-8">
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
-
+    <footer className="bg-cream text-ink-500 border-t border-line">
+      <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
           {/* Brand */}
-          <div className="md:col-span-4">
-            <Link to="/" className="inline-block mb-6 opacity-90 hover:opacity-100 transition-opacity">
-              <img
-                src="/logo_black.png"
-                alt="Brolly Solutions"
-                className="h-8 w-auto object-contain"
-                style={{ filter: 'brightness(0)' }}
-              />
+          <div className="col-span-2 md:col-span-4">
+            <Link to="/" className="inline-block mb-5">
+              <img src="/logo_black.png" alt="Brolly Software Solutions" className="h-10 w-auto object-contain" />
             </Link>
-            <p className="text-black text-base leading-relaxed max-w-sm font-normal">
-              Boutique software engineering and tech advisory. We build reliable, scalable systems for businesses that demand excellence.
+            <p className="text-sm leading-relaxed max-w-xs text-ink-500">
+              {COMPANY.tagline} We build reliable, scalable software for enterprises across BFSI, healthcare,
+              retail and beyond.
             </p>
+            <div className="flex gap-3 mt-6">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  aria-label={s.label}
+                  className="flex items-center justify-center w-10 h-10 rounded-lg border border-line text-ink-700 hover:text-accent-600 hover:border-accent-500 hover:bg-accent-500/5 transition-colors"
+                >
+                  <Icon name={s.icon} className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Nav */}
+          {/* Company links */}
           <div className="md:col-span-2 md:col-start-6">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-black font-semibold mb-6">Navigation</p>
-            <ul className="space-y-3.5">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    to={item.href}
-                    className="text-base text-black hover:text-brand-gold transition-colors duration-300 font-normal"
-                  >
-                    {item.label}
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-navy-900 mb-5">Company</p>
+            <ul className="space-y-3">
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link to={l.href} className="text-sm hover:text-accent-600 transition-colors">
+                    {l.name}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Social */}
-          <div className="md:col-span-2">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-black font-semibold mb-6">Social</p>
-            <ul className="space-y-3.5">
-              {socialItems.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="text-base text-black hover:text-brand-gold transition-colors duration-300 font-normal"
-                  >
-                    {item.label}
-                  </a>
+          {/* Services */}
+          <div className="md:col-span-3">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-navy-900 mb-5">Services</p>
+            <ul className="space-y-3">
+              {SERVICES.slice(0, 5).map((s) => (
+                <li key={s.title}>
+                  <Link to="/services" className="text-sm hover:text-accent-600 transition-colors">
+                    {s.title}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-3">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-black font-semibold mb-6">Contact</p>
-            <ul className="space-y-3.5 text-base font-normal text-black">
-              <li>
-                <a
-                  href="mailto:hello@brollysolutions.com"
-                  className="hover:text-brand-gold transition-colors duration-300"
-                >
-                  hello@brollysolutions.com
+          <div className="col-span-2 md:col-span-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-navy-900 mb-5">Get in Touch</p>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-2.5">
+                <Icon name="mail" className="w-4 h-4 mt-0.5 text-accent-600 shrink-0" />
+                <a href={`mailto:${COMPANY.email}`} className="hover:text-accent-600 transition-colors break-all">
+                  {COMPANY.email}
                 </a>
               </li>
-              <li>Mon — Sat, 9am — 6pm IST</li>
-              <li className="pt-2">
-                <Link
-                  to="/contact"
-                  className="text-black text-base font-semibold border-b border-black pb-1 hover:text-brand-gold hover:border-brand-gold transition-all duration-300"
-                >
-                  Start a Project
-                </Link>
+              <li className="flex items-start gap-2.5">
+                <Icon name="phone" className="w-4 h-4 mt-0.5 text-accent-600 shrink-0" />
+                <a href={`tel:${COMPANY.phone.replace(/\s/g, '')}`} className="hover:text-accent-600 transition-colors">
+                  {COMPANY.phone}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Icon name="pin" className="w-4 h-4 mt-0.5 text-accent-600 shrink-0" />
+                <span>HITEC City, Hyderabad, India</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-zinc-300">
-          <p className="text-sm text-black font-normal">
-            © {currentYear} Brolly Solutions. All rights reserved.
+        {/* Legal bar */}
+        <div className="mt-16 pt-8 border-t border-line flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-ink-500">
+            © {year} {COMPANY.legalName}. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <Link to="/privacy" className="text-sm text-black hover:text-brand-gold transition-colors font-normal">
+          <div className="flex gap-6 text-sm">
+            <Link to="/contact" className="text-ink-500 hover:text-accent-600 transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-sm text-black hover:text-brand-gold transition-colors font-normal">
+            <Link to="/contact" className="text-ink-500 hover:text-accent-600 transition-colors">
               Terms of Service
             </Link>
           </div>
         </div>
-
       </div>
     </footer>
   );

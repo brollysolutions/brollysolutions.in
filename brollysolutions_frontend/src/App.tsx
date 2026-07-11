@@ -3,9 +3,12 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ClientSpotlight from '@/components/layout/ClientSpotlight';
+import ScrollToTop from '@/components/common/ScrollToTop';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Services from '@/pages/Services';
+import Industries from '@/pages/Industries';
+import Careers from '@/pages/Careers';
 import Products from '@/pages/Products';
 import Contact from '@/pages/Contact';
 import Chatbot from '@/pages/Chatbot';
@@ -18,6 +21,7 @@ function AppLayout() {
 
   return (
     <ClientSpotlight>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         {!hideChrome && <Navbar />}
         <main className="flex-grow">
@@ -25,6 +29,8 @@ function AppLayout() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/industries" element={<Industries />} />
+            <Route path="/careers" element={<Careers />} />
             <Route path="/products" element={<Products />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/chatbot" element={<Chatbot />} />

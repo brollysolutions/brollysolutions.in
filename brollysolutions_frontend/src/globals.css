@@ -1,24 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Mono:wght@400;500&display=swap');
+/* ============================================================================
+   Brolly Software Solutions — Global Design System
+   Corporate / enterprise theme (navy + teal accent), Infosys/Wipro/TCS style.
+   Tailwind CSS v4 (@theme tokens generate the color / font utilities).
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
+  /* ── Primary: warm charcoal (ink / buttons — no blue) ─────────── */
+  --color-navy-950: #0d0b09;
+  --color-navy-900: #211c17;   /* headings & primary button    */
+  --color-navy-800: #2c261f;
+  --color-navy-700: #3d352c;   /* button hover                 */
+  --color-navy-600: #4f463b;
+  --color-navy-500: #6b6053;
+
+  /* ── Accent: signature Brolly gold ────────────────────────────── */
+  --color-accent-300: #e8cf7a;  /* light gold — for the navy sections */
+  --color-accent-400: #d4b04a;
+  --color-accent-500: #c29b38;  /* primary accent               */
+  --color-accent-600: #a17f2a;  /* hover                        */
+  --color-accent-700: #856a22;
+
+  /* ── Neutral surfaces / ink (warm, cream-friendly) ────────────── */
+  --color-ink-900: #211c17;     /* headings                     */
+  --color-ink-700: #4a423a;
+  --color-ink-500: #6f665b;     /* body copy                    */
+  --color-cream: #f7f2e6;       /* signature cream background   */
+  --color-cream-deep: #f0e9d8;  /* slightly deeper cream        */
+  --color-surface: #faf6ec;     /* light cream section bg       */
+  --color-line: #e9e2d3;        /* warm hairline borders        */
+
+  /* ── Legacy aliases (kept so backend-wired pages don't break) ──
+     The old boutique theme referenced `brand-gold`, `brand-surface`,
+     `font-serif`, etc. We remap them onto the new corporate palette
+     so /products, /chatbot, /rag_chatbot and LeadForm stay coherent. */
   --color-brand-black: #ffffff;
-  --color-brand-surface: #fafafa;
-  --color-brand-dark: #f4f4f5;
-  --color-brand-border: #e4e4e7;
+  --color-brand-surface: #faf6ec;
+  --color-brand-dark: #f0e9d8;
+  --color-brand-border: #e9e2d3;
   --color-brand-gold: #c29b38;
   --color-brand-gold-hover: #a17f2a;
   --color-brand-gold-dim: rgba(194, 155, 56, 0.06);
 
-  /* Typography */
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-heading: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* ── Typography ───────────────────────────────────────────────── */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
   --font-mono: 'DM Mono', ui-monospace, monospace;
 
-  /* Transitions */
+  /* ── Motion ───────────────────────────────────────────────────── */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -26,115 +59,140 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    /* offset for the sticky navbar when jumping to #anchors */
+    scroll-padding-top: 96px;
   }
 
   body {
-    background-color: var(--color-brand-black);
-    color: #09090b;
+    background-color: #ffffff;
+    color: var(--color-ink-700);
     font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    color: var(--color-ink-900);
+    letter-spacing: -0.02em;
   }
 
   /* Scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #ffffff; }
-  ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-gold); }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #f0e9d8; }
+  ::-webkit-scrollbar-thumb { background: #d9cfb8; border-radius: 6px; border: 2px solid #f0e9d8; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-accent-500); }
 
-  /* Selection */
   ::selection {
-    background: #c29b38;
+    background: var(--color-accent-500);
     color: #ffffff;
   }
 }
 
-/* Utility classes */
+/* ── Reusable component classes (used by legacy pages + as helpers) ── */
 @layer components {
-  .label {
-    font-family: var(--font-mono);
-    font-size: 10px;
+  /* Small uppercase eyebrow label with an accent tick */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.35em;
-    color: var(--color-brand-gold);
+    letter-spacing: 0.22em;
+    color: var(--color-accent-600);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 2px;
+    background: var(--color-accent-500);
+    border-radius: 2px;
+  }
+
+  /* Legacy `.label` alias — mapped to the new eyebrow look */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--color-accent-600);
     display: inline-flex;
     align-items: center;
     gap: 12px;
   }
-
   .label::before,
   .label::after {
     content: '';
     display: block;
     width: 28px;
-    height: 1px;
-    background: rgba(194, 155, 56, 0.4);
+    height: 2px;
+    background: var(--color-accent-500);
+    border-radius: 2px;
     flex-shrink: 0;
   }
-
   .label.label-left::before { display: none; }
   .label.label-right::after { display: none; }
 
+  /* Primary button — solid navy (trustworthy corporate CTA) */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 14px 32px;
-    background: var(--color-brand-gold);
+    padding: 14px 30px;
+    background: var(--color-navy-900);
     color: #ffffff;
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
-    border-radius: 999px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(194, 155, 56, 0.15);
-    letter-spacing: 0.01em;
+    border-radius: 8px;
+    transition: all 0.25s var(--ease-out-expo);
+    box-shadow: 0 6px 20px rgba(10, 30, 58, 0.18);
   }
-
   .btn-primary:hover {
-    background: var(--color-brand-gold-hover);
-    box-shadow: 0 4px 30px rgba(194, 155, 56, 0.25);
-    transform: translateY(-1px);
+    background: var(--color-navy-700);
+    box-shadow: 0 10px 28px rgba(10, 30, 58, 0.28);
+    transform: translateY(-2px);
   }
 
+  /* Secondary button — outline */
   .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 14px 32px;
-    border: 1px solid #d4d4d8;
-    color: #09090b;
+    padding: 14px 30px;
+    border: 1.5px solid var(--color-line);
+    color: var(--color-ink-900);
+    background: #ffffff;
     font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 999px;
-    transition: all 0.3s ease;
-    background: rgba(0,0,0,0.01);
-    letter-spacing: 0.01em;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.25s var(--ease-out-expo);
   }
-
   .btn-secondary:hover {
-    border-color: var(--color-brand-gold);
-    color: var(--color-brand-gold);
-    background: rgba(194, 155, 56, 0.02);
+    border-color: var(--color-accent-500);
+    color: var(--color-accent-600);
+    transform: translateY(-2px);
   }
 
+  /* Card surface */
   .card {
-    background: var(--color-brand-surface);
-    border: 1px solid var(--color-brand-border);
+    background: #ffffff;
+    border: 1px solid var(--color-line);
     border-radius: 16px;
-    transition: border-color 0.4s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
-
   .card:hover {
-    border-color: rgba(194, 155, 56, 0.3);
+    border-color: rgba(194, 155, 56, 0.4);
+    box-shadow: 0 18px 40px -18px rgba(15, 42, 78, 0.25);
   }
 }
 
+/* ── Keyframes ────────────────────────────────────────────────── */
 @keyframes slow-pan {
   0% { background-position: 0% 0%; }
   50% { background-position: 100% 100%; }
@@ -142,6 +200,11 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.05; transform: scale(1); }
-  50% { opacity: 0.1; transform: scale(1.15); }
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.12); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }

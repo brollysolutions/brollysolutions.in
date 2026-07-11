@@ -30,7 +30,7 @@ export default function ClientSpotlight({ children }: { children: React.ReactNod
           y: lightY,
           translateX: "-50%",
           translateY: "-50%",
-          background: "radial-gradient(circle, rgba(242,218,96,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(194,155,56,0.05) 0%, transparent 70%)",
         }}
       />
 

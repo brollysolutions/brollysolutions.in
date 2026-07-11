@@ -9,6 +9,7 @@ export default function LeadForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
   });
 
@@ -28,6 +29,7 @@ export default function LeadForm() {
       const submissionData = new FormData();
       submissionData.append('name', formData.name);
       submissionData.append('email', formData.email);
+      submissionData.append('phone', formData.phone);
       submissionData.append('message', formData.message);
       if (file) submissionData.append('document', file);
 
@@ -37,7 +39,7 @@ export default function LeadForm() {
         duration: 5000,
       });
 
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
       setFile(null);
     } catch {
       toast.error('Something went wrong. Please try again.');
@@ -95,6 +97,21 @@ export default function LeadForm() {
             placeholder="jane@company.com"
           />
         </div>
+      </div>
+
+      {/* Phone */}
+      <div className="space-y-2">
+        <label className="text-xs font-mono uppercase tracking-[0.3em] text-black block font-semibold">
+          Phone <span className="normal-case tracking-normal text-zinc-400">(optional)</span>
+        </label>
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className={inputClass}
+          placeholder="+91 90000 12345"
+        />
       </div>
 
       {/* Message */}
