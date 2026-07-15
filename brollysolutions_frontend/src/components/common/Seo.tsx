@@ -13,7 +13,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { COMPANY } from '@/data/content';
-import { ROUTE_SEO, DEFAULT_OG_IMAGE, NOINDEX_PATHS, absoluteUrl } from '@/data/seo';
+import { ROUTE_SEO, DEFAULT_OG_IMAGE, absoluteUrl } from '@/data/seo';
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -35,23 +35,12 @@ function upsertCanonical(href: string) {
   el.href = href;
 }
 
-function setRobots(noindex: boolean) {
-  const el = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
-  if (noindex) {
-    upsertMeta('name', 'robots', 'noindex, nofollow');
-  } else if (el) {
-    el.remove();
-  }
-}
-
 export default function Seo() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setRobots(NOINDEX_PATHS.includes(pathname));
-
     const route = ROUTE_SEO.find((r) => r.path === pathname);
-    // Unknown route (e.g. the app pages): leave whatever the server sent.
+    // Unknown route: leave whatever the server sent rather than guessing.
     if (!route) return;
 
     const url = absoluteUrl(route.path);

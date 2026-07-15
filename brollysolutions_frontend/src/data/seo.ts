@@ -31,9 +31,12 @@ export interface RouteSeo {
 }
 
 /**
- * Only public marketing routes belong here. The standalone app routes
- * (/chatbot, /rag_chatbot) are intentionally excluded — they are products,
- * not landing pages, and are disallowed in robots.txt.
+ * Every route this SPA renders (see App.tsx). Each one gets its own prerendered
+ * HTML file at build time and a sitemap entry.
+ *
+ * Only add paths React actually serves. A path handled by another app on the
+ * domain must NOT go here — generating HTML for it would shadow the real app.
+ * Those belong in EXTERNAL_PRODUCT_PATHS below.
  */
 export const ROUTE_SEO: RouteSeo[] = [
   {
@@ -71,6 +74,20 @@ export const ROUTE_SEO: RouteSeo[] = [
       'The world’s first RAG-powered outbound voice agent. Upload your data, prompt in plain English, and launch thousands of personalized calls in seconds.',
   },
   {
+    path: '/chatbot',
+    title: 'Chatbot — Conversational AI Assistant | Brolly',
+    description:
+      'A next-generation conversational assistant built on advanced LLMs. Integrates with your knowledge base, handles complex customer queries, and automates support workflows with human-like precision.',
+    ogTitle: 'Brolly Chatbot — Conversational intelligence for your business',
+  },
+  {
+    path: '/rag_chatbot',
+    title: 'RAG Chatbot — Retrieval-Augmented AI Assistant | Brolly',
+    description:
+      'Ground your assistant in your own documents. Brolly’s RAG chatbot retrieves and cites the right context so answers stay accurate, current, and trustworthy.',
+    ogTitle: 'Brolly RAG Chatbot — Answers grounded in your own documents',
+  },
+  {
     path: '/industries',
     title: `Industries — ${COMPANY.name}`,
     description:
@@ -88,7 +105,17 @@ export const ROUTE_SEO: RouteSeo[] = [
   },
 ];
 
-/** Routes served by the SPA that must never be indexed. */
-export const NOINDEX_PATHS = ['/chatbot', '/rag_chatbot'];
+/**
+ * Product URLs that live on this domain but are served by OTHER applications —
+ * this SPA has no route for them (see PRODUCTS in content.ts, where they are
+ * absolute links).
+ *
+ * They are listed in sitemap.xml so search engines discover them, but the build
+ * deliberately generates NO HTML for them: writing dist/resume_generator/index.html
+ * would make nginx serve this SPA's empty shell instead of the real app.
+ *
+ * Their <title>/<description> must be set by the app that owns them.
+ */
+export const EXTERNAL_PRODUCT_PATHS = ['/resume_generator', '/prompt_generator'];
 
 export const absoluteUrl = (path: string) => (path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}`);
