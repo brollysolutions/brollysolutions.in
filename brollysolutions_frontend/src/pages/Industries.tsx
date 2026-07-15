@@ -2,7 +2,6 @@
  * Industries — interior hero, full industries grid, and a "how we help"
  * value strip, then CTA.
  */
-import { useEffect } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import Section from '@/components/ui/Section';
 import Eyebrow from '@/components/ui/Eyebrow';
@@ -10,7 +9,6 @@ import Reveal from '@/components/ui/Reveal';
 import Icon from '@/components/ui/Icon';
 import IndustriesSection from '@/components/sections/IndustriesSection';
 import CTASection from '@/components/sections/CTASection';
-import { COMPANY } from '@/data/content';
 
 const CAPABILITIES = [
   { icon: 'shield', title: 'Regulatory awareness', desc: 'Compliance-conscious design for sectors where audits and data protection are non-negotiable.' },
@@ -19,10 +17,6 @@ const CAPABILITIES = [
 ] as const;
 
 export default function Industries() {
-  useEffect(() => {
-    document.title = `Industries — ${COMPANY.name}`;
-  }, []);
-
   return (
     <>
       <PageHeader

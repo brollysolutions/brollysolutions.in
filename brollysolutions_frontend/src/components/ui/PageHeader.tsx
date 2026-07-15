@@ -3,14 +3,17 @@
  * Services, Products, Industries, Careers, Contact).
  */
 import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 
 interface PageHeaderProps {
   eyebrow: string;
   title: string;
   subtitle?: string;
+  /** optional call-to-action row rendered under the subtitle */
+  actions?: ReactNode;
 }
 
-export default function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps) {
+export default function PageHeader({ eyebrow, title, subtitle, actions }: PageHeaderProps) {
   return (
     <header className="relative overflow-hidden bg-cream text-ink-700 pt-36 pb-16 md:pt-44 md:pb-20 px-6 border-b border-line">
       {/* grid + glow */}
@@ -55,6 +58,16 @@ export default function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps
           >
             {subtitle}
           </motion.p>
+        )}
+        {actions && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.32 }}
+            className="mt-9 flex flex-wrap gap-4"
+          >
+            {actions}
+          </motion.div>
         )}
       </div>
     </header>

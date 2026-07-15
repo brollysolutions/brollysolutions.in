@@ -1,20 +1,15 @@
 /**
  * Careers — interior hero, culture/perks, open roles list, and CTA.
  */
-import { useEffect } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import Section from '@/components/ui/Section';
 import Eyebrow from '@/components/ui/Eyebrow';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/ui/Icon';
-import { OPENINGS, CAREER_PERKS, COMPANY } from '@/data/content';
+import { OPENINGS, CAREER_PERKS } from '@/data/content';
 
 export default function Careers() {
-  useEffect(() => {
-    document.title = `Careers — ${COMPANY.name}`;
-  }, []);
-
   return (
     <>
       <PageHeader

@@ -85,9 +85,9 @@ export default function ProductsSection({ withHeader = true, withCta = false, to
         </div>
       )}
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {PRODUCTS.map((product, i) => (
-          <Reveal key={product.title} delay={(i % 4) * 0.08}>
+          <Reveal key={product.title} delay={(i % 3) * 0.08}>
             <ProductCard product={product} />
           </Reveal>
         ))}

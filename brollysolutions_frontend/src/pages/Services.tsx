@@ -2,7 +2,6 @@
  * Services — full services page: interior hero, the reusable service grid,
  * engagement-model section, transparent process, and a closing CTA.
  */
-import { useEffect } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import Section from '@/components/ui/Section';
 import Eyebrow from '@/components/ui/Eyebrow';
@@ -10,7 +9,6 @@ import Reveal from '@/components/ui/Reveal';
 import Icon, { type IconName } from '@/components/ui/Icon';
 import ServicesSection from '@/components/sections/ServicesSection';
 import CTASection from '@/components/sections/CTASection';
-import { COMPANY } from '@/data/content';
 
 const ENGAGEMENT: { icon: IconName; title: string; desc: string }[] = [
   {
@@ -38,10 +36,6 @@ const PROCESS = [
 ];
 
 export default function Services() {
-  useEffect(() => {
-    document.title = `Services — ${COMPANY.name}`;
-  }, []);
-
   return (
     <>
       <PageHeader
