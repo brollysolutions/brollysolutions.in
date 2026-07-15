@@ -3,7 +3,14 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import fs from 'fs';
 import { COMPANY } from './src/data/content';
-import { ROUTE_SEO, SITE_URL, DEFAULT_OG_IMAGE, NOINDEX_PATHS, absoluteUrl, type RouteSeo } from './src/data/seo';
+import {
+  ROUTE_SEO,
+  SITE_URL,
+  DEFAULT_OG_IMAGE,
+  EXTERNAL_PRODUCT_PATHS,
+  absoluteUrl,
+  type RouteSeo,
+} from './src/data/seo';
 
 const SEO_OPEN = '<!--seo-->';
 const SEO_CLOSE = '<!--/seo-->';
@@ -33,14 +40,15 @@ function seoBlock(route: RouteSeo): string {
   ].join('\n    ');
 }
 
+/** SPA routes plus the product apps served elsewhere on the domain. */
 function sitemap(): string {
-  const urls = ROUTE_SEO.map((r) => `  <url>\n    <loc>${absoluteUrl(r.path)}</loc>\n  </url>`).join('\n');
+  const paths = [...ROUTE_SEO.map((r) => r.path), ...EXTERNAL_PRODUCT_PATHS];
+  const urls = paths.map((p) => `  <url>\n    <loc>${absoluteUrl(p)}</loc>\n  </url>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
 function robots(): string {
-  const disallow = NOINDEX_PATHS.map((p) => `Disallow: ${p}`).join('\n');
-  return `User-agent: *\nAllow: /\n${disallow}\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  return `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
 }
 
 /**
