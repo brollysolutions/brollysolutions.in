@@ -4,12 +4,14 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ClientSpotlight from '@/components/layout/ClientSpotlight';
 import ScrollToTop from '@/components/common/ScrollToTop';
+import Seo from '@/components/common/Seo';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Services from '@/pages/Services';
 import Industries from '@/pages/Industries';
 import Careers from '@/pages/Careers';
 import Products from '@/pages/Products';
+import VoxFlow from '@/pages/VoxFlow';
 import Contact from '@/pages/Contact';
 import Chatbot from '@/pages/Chatbot';
 import RAGChatbot from '@/pages/RAGChatbot';
@@ -22,6 +24,7 @@ function AppLayout() {
   return (
     <ClientSpotlight>
       <ScrollToTop />
+      <Seo />
       <div className="flex flex-col min-h-screen">
         {!hideChrome && <Navbar />}
         <main className="flex-grow">
@@ -32,6 +35,7 @@ function AppLayout() {
             <Route path="/industries" element={<Industries />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/voxflow" element={<VoxFlow />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/chatbot" element={<Chatbot />} />
             <Route path="/rag_chatbot" element={<RAGChatbot />} />

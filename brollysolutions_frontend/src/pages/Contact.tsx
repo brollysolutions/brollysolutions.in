@@ -2,7 +2,6 @@
  * Contact — interior hero, contact info cards, the LeadForm, address block,
  * and a map embed placeholder.
  */
-import { useEffect } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import Section from '@/components/ui/Section';
 import Reveal from '@/components/ui/Reveal';
@@ -17,10 +16,6 @@ const INFO: { icon: IconName; label: string; value: string; href?: string }[] = 
 ];
 
 export default function Contact() {
-  useEffect(() => {
-    document.title = `Contact — ${COMPANY.name}`;
-  }, []);
-
   return (
     <>
       <PageHeader

@@ -83,7 +83,113 @@ export const PRODUCTS: Product[] = [
     href: 'https://brollysolutions.in/prompt_generator',
     badge: 'Developer Tool',
   },
+  {
+    icon: 'voice',
+    title: 'Brolly VoxFlow',
+    tagline: 'Spreadsheet-to-Voice Automation',
+    description:
+      'Turn raw data into live conversations with the world’s first RAG-powered outbound voice agent. Upload a lead list, assign a task in plain English, and launch thousands of context-aware calls in seconds.',
+    href: '/voxflow',
+    badge: 'New',
+  },
 ];
+
+/* ── Brolly VoxFlow — copy for the /voxflow product detail page ──── */
+export interface VoxFlowStep {
+  step: string;
+  title: string;
+  body: string;
+}
+
+export interface VoxFlowFeature {
+  icon: IconName;
+  title: string;
+  body: string;
+}
+
+export const VOXFLOW = {
+  /** The live VoxFlow app — target of the "View product" button on /voxflow. */
+  appUrl: 'https://brollysolutions.in/voiceagent',
+
+  /**
+   * Demo video shown on /voxflow.
+   *
+   * TO ADD THE REAL RECORDING — no code changes needed beyond this block:
+   *   1. Drop the file into `public/` (e.g. public/voxflow-demo.mp4).
+   *   2. Set `src` to its path from the site root, e.g. '/voxflow-demo.mp4'.
+   *   3. Optionally add a still frame as `poster` (e.g. '/voxflow-demo-poster.jpg')
+   *      so the player shows an image instead of a black box before playback.
+   *
+   * While `src` is empty the page renders a placeholder instead of a player.
+   * Use MP4 (H.264 + AAC) — it is the only format that plays everywhere.
+   */
+  demo: {
+    src: '' as string,
+    poster: '' as string,
+    caption: 'Watch a lead list become live, personalized phone calls — end to end, in under two minutes.',
+  },
+
+  intro:
+    'Stop spending hours manually dialing leads, tracking down time zones, and reading script templates. With Brolly VoxFlow, you can upload your data, assign a task in plain English, and watch your spreadsheets transform into thousands of automated, context-aware phone calls in seconds.',
+
+  steps: [
+    {
+      step: '01',
+      title: 'Upload your data',
+      body: 'Drop your lead lists directly into the system. Brolly VoxFlow seamlessly parses CSV, Excel, or unstructured text files without requiring manual field mapping.',
+    },
+    {
+      step: '02',
+      title: 'Prompt your agent',
+      body: 'Assign tasks using natural language. Simply type a prompt like: “Call every lead in this file, inform them their product demo is tonight at 6:00 PM, and confirm if they can still attend.”',
+    },
+    {
+      step: '03',
+      title: 'Smart execution',
+      body: 'Our advanced Retrieval-Augmented Generation (RAG) engine scans your document, extracts individual lead variables (names, times, notes), and feeds them into our voice pipeline to launch high-fidelity outbound calls instantly.',
+    },
+  ] as VoxFlowStep[],
+
+  features: [
+    {
+      icon: 'bolt',
+      title: 'Dynamic data injection',
+      body: 'The agent references specific cell data in real-time, making every automated call sound personalized, natural, and human.',
+    },
+    {
+      icon: 'ai',
+      title: 'Autonomous task execution',
+      body: 'VoxFlow doesn’t just read a script; it understands the goal of your prompt and handles conversational deviations natively.',
+    },
+    {
+      icon: 'cloud',
+      title: 'Instant scalability',
+      body: 'Move from a single uploaded file to thousands of simultaneous, concurrent phone calls without hitting infrastructure bottlenecks.',
+    },
+    {
+      icon: 'signal',
+      title: 'Live status dashboard',
+      body: 'Track call completions, answer rates, and sentiment analysis directly from your Brolly console.',
+    },
+  ] as VoxFlowFeature[],
+
+  architecture: {
+    intro:
+      'For engineering teams looking under the hood, Brolly VoxFlow bridges advanced language modeling with low-latency telephony infrastructure:',
+    items: [
+      {
+        icon: 'ai',
+        title: 'The RAG pipeline',
+        body: 'Implements structural document parsing paired with a high-performance vector database for semantic search and accurate prompt injection.',
+      },
+      {
+        icon: 'voice',
+        title: 'The voice engine',
+        body: 'Powered by state-of-the-art LLM frameworks and low-latency WebRTC/SIP trunking to ensure sub-second response times during live dialogue.',
+      },
+    ] as VoxFlowFeature[],
+  },
+};
 
 /* ── Services ───────────────────────────────────────────────────── */
 export interface Service {

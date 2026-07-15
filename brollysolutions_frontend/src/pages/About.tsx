@@ -1,7 +1,6 @@
 /**
  * About — company story, mission/vision, Why Brolly, values, leadership, stats.
  */
-import { useEffect } from 'react';
 import PageHeader from '@/components/ui/PageHeader';
 import Section from '@/components/ui/Section';
 import Eyebrow from '@/components/ui/Eyebrow';
@@ -26,10 +25,6 @@ const LEADERSHIP = [
 ];
 
 export default function About() {
-  useEffect(() => {
-    document.title = `About — ${COMPANY.name}`;
-  }, []);
-
   return (
     <>
       <PageHeader

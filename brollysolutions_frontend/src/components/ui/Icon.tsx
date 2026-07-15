@@ -39,6 +39,8 @@ export type IconName =
   | 'chat'
   | 'document'
   | 'terminal'
+  | 'voice'
+  | 'play'
   | 'login';
 
 // Each entry is the inner markup of a 24×24 icon (paths only).
@@ -193,6 +195,18 @@ const PATHS: Record<IconName, React.ReactNode> = {
     <>
       <rect x="3" y="4" width="18" height="16" rx="2" />
       <path d="M7 9l3 3-3 3m5 0h4" />
+    </>
+  ),
+  voice: (
+    <>
+      <rect x="9" y="2" width="6" height="11" rx="3" />
+      <path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6" />
+    </>
+  ),
+  play: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10 8.5v7l6-3.5-6-3.5Z" />
     </>
   ),
   login: (
