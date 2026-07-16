@@ -124,7 +124,7 @@ export const VOXFLOW = {
    * Use MP4 (H.264 + AAC) — it is the only format that plays everywhere.
    */
   demo: {
-    src: '' as string,
+    src: '/voxflow-demo.mp4' as string,
     poster: '' as string,
     caption: 'Watch a lead list become live, personalized phone calls — end to end, in under two minutes.',
   },

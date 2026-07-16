@@ -26,6 +26,9 @@ function DemoVideo() {
             <video
               className="block w-full aspect-video bg-black"
               controls
+              controlsList="nodownload"
+              disablePictureInPicture
+              onContextMenu={(e) => e.preventDefault()}
               preload="metadata"
               playsInline
               poster={poster || undefined}
